@@ -1,4 +1,4 @@
-package net.oktoberfest.services.PersonServiceImpl;
+package net.oktoberfest.services.impl;
 
 import net.oktoberfest.model.entities.Person;
 import net.oktoberfest.repository.PersonRepository;

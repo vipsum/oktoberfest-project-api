@@ -1,9 +1,6 @@
 package net.oktoberfest.model.entities;
 
 import lombok.Data;
-
-import net.oktoberfest.model.entities.BeerBrand;
-
 import javax.persistence.*;
 
 

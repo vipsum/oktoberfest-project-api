@@ -17,4 +17,6 @@ public class PersonRequest {
 
         return new Person(this, beerBrandList);
     }
+
+
 }

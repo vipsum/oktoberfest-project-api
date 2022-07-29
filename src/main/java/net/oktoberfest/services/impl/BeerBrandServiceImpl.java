@@ -1,8 +1,9 @@
-package net.oktoberfest.services.BeerBrandServiceImpl;
+package net.oktoberfest.services.impl;
 
 import net.oktoberfest.model.entities.BeerBrand;
 import net.oktoberfest.repository.BeerBrandRepository;
 import net.oktoberfest.services.BeerBrandService;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
