@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.oktoberfest.model.client.request.PersonRequest;
 import net.oktoberfest.model.client.response.PersonResponse;
+import net.oktoberfest.repository.BeerBrandRepository;
 
 import javax.persistence.*;
 import java.util.List;
@@ -32,7 +33,7 @@ public Person(PersonRequest personRequest, List<BeerBrand> beerBrandList){
     this.weight = personRequest.getWeight();
     this.aguante = personRequest.getAguante();
     this.likesMusic = personRequest.isLikesMusic();
-    this.preferredBeerBrand = personRequest.beerBrandList();
+    this.preferredBeerBrand = beerBrandList;
 }
 
 public Person(int weight, int aguante,  boolean likesMusic, List<BeerBrand> preferredBeerBrand){

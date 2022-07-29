@@ -3,7 +3,7 @@ package net.oktoberfest.model.client.request;
 import lombok.Data;
 import net.oktoberfest.model.entities.BeerBrand;
 import net.oktoberfest.model.entities.Person;
-
+import net.oktoberfest.services.impl.BeerBrandServiceImpl;
 import java.util.List;
 
 @Data
