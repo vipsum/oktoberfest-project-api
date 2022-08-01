@@ -2,8 +2,6 @@ package net.oktoberfest.model.entities;
 
 import lombok.Data;
 import net.oktoberfest.model.client.request.BeerBrandRequest;
-import net.oktoberfest.model.client.request.PersonRequest;
-import net.oktoberfest.model.client.request.BeerBrandRequest;
 import net.oktoberfest.model.client.response.BeerBrandResponse;
 import javax.persistence.*;
 
