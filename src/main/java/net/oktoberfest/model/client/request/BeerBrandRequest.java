@@ -5,7 +5,7 @@ import net.oktoberfest.model.entities.BeerBrand;
 
 @Data
 public class BeerBrandRequest {
-    private long id;
+    
     private String beerName;
     private Double alcoholPercentage;
 

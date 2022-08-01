@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class PersonRequest {
+    
     private int weight;
     private int aguante;
     private boolean likesMusic;
