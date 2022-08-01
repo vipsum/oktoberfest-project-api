@@ -1,7 +1,10 @@
 package net.oktoberfest.model.entities;
 
 import lombok.Data;
-
+import net.oktoberfest.model.client.request.BeerBrandRequest;
+import net.oktoberfest.model.client.request.PersonRequest;
+import net.oktoberfest.model.client.request.BeerBrandRequest;
+import net.oktoberfest.model.client.response.BeerBrandResponse;
 import javax.persistence.*;
 
 @Data
@@ -17,13 +20,18 @@ public class BeerBrand {
 
     private Double alcoholPercentage;
 
- public BeerBrand(){
-
+    public BeerBrand(BeerBrandRequest beerBrandRequest) {
+        this.beerName = beerBrandRequest.getBeerName();
+        this.alcoholPercentage = beerBrandRequest.getAlcoholPercentage();
     }
 
-    public BeerBrand (String beerName, Double alcoholPercentage){
-     this.beerName = beerName;
-     this.alcoholPercentage = alcoholPercentage;
+    public BeerBrand(String beerName, Double alcoholPercentage) {
+        this.beerName = beerName;
+        this.alcoholPercentage = alcoholPercentage;
+    }
+
+    public BeerBrandResponse response(){
+        return new BeerBrandResponse(this);
     }
 
     @Override

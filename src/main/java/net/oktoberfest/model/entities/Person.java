@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.oktoberfest.model.client.request.PersonRequest;
 import net.oktoberfest.model.client.response.PersonResponse;
-import net.oktoberfest.repository.BeerBrandRepository;
+
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,28 +27,27 @@ public class Person {
     @JoinColumn(name = "person_id")
     private List<BeerBrand> preferredBeerBrand;
 
+    public Person(PersonRequest personRequest, List<BeerBrand> beerBrandList) {
+        this.weight = personRequest.getWeight();
+        this.aguante = personRequest.getAguante();
+        this.likesMusic = personRequest.isLikesMusic();
+        this.preferredBeerBrand = beerBrandList;
+    }
 
+    public Person(int weight, int aguante, boolean likesMusic, List<BeerBrand> preferredBeerBrand) {
+        this.weight = weight;
+        this.aguante = aguante;
+        this.likesMusic = likesMusic;
+        this.preferredBeerBrand = preferredBeerBrand;
+    }
 
-public Person(PersonRequest personRequest, List<BeerBrand> beerBrandList){
-    this.weight = personRequest.getWeight();
-    this.aguante = personRequest.getAguante();
-    this.likesMusic = personRequest.isLikesMusic();
-    this.preferredBeerBrand = beerBrandList;
-}
+    public PersonResponse response() {
+        return new PersonResponse(this);
+    }
 
-public Person(int weight, int aguante,  boolean likesMusic, List<BeerBrand> preferredBeerBrand){
-    this.weight = weight;
-    this.aguante = aguante;
-    this.likesMusic = likesMusic;
-    this.preferredBeerBrand = preferredBeerBrand;
-}
-
-public PersonResponse response (){
-    return new PersonResponse(this);
-}
-@Override
+    @Override
     public String toString() {
-    return "Register success. Your ID is: " + id;
-}
+        return "Register success. Your ID is: " + id;
+    }
 }
 
