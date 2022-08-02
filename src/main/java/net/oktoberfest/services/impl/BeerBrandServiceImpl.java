@@ -4,12 +4,14 @@ import net.oktoberfest.model.entities.BeerBrand;
 import net.oktoberfest.repository.BeerBrandRepository;
 import net.oktoberfest.services.BeerBrandService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class BeerBrandServiceImpl implements BeerBrandService {
+    @Autowired
     private BeerBrandRepository beerBrandRepository;
 
     public BeerBrand createBeerBrand(BeerBrand beerBrand){

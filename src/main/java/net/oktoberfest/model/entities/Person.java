@@ -21,7 +21,7 @@ public class Person {
 
     private int weight;
 
-    private int aguante;
+    private int alcoholToleranceInBlood;
     private boolean likesMusic;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
@@ -29,14 +29,14 @@ public class Person {
 
     public Person(PersonRequest personRequest, List<BeerBrand> beerBrandList) {
         this.weight = personRequest.getWeight();
-        this.aguante = personRequest.getAguante();
+        this.alcoholToleranceInBlood = personRequest.getAlcoholToleranceInBlood();
         this.likesMusic = personRequest.isLikesMusic();
         this.preferredBeerBrand = beerBrandList;
     }
 
-    public Person(int weight, int aguante, boolean likesMusic, List<BeerBrand> preferredBeerBrand) {
+    public Person(int weight, int alcoholToleranceInBlood, boolean likesMusic, List<BeerBrand> preferredBeerBrand) {
         this.weight = weight;
-        this.aguante = aguante;
+        this.alcoholToleranceInBlood = alcoholToleranceInBlood;
         this.likesMusic = likesMusic;
         this.preferredBeerBrand = preferredBeerBrand;
     }

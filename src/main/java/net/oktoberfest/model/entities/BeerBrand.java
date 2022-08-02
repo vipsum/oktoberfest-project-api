@@ -1,12 +1,14 @@
 package net.oktoberfest.model.entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import net.oktoberfest.model.client.request.BeerBrandRequest;
 import net.oktoberfest.model.client.response.BeerBrandResponse;
 import javax.persistence.*;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "BeerBrand")
 public class BeerBrand {
     @Id
