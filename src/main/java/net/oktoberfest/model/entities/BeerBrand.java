@@ -23,7 +23,7 @@ public class BeerBrand {
         this.alcoholPercentage = beerBrandRequest.getAlcoholPercentage();
     }
 
-    public BeerBrand(String beerName, Double alcoholPercentage) {
+    public BeerBrand(String beerName, double alcoholPercentage) {
         this.beerName = beerName;
         this.alcoholPercentage = alcoholPercentage;
     }

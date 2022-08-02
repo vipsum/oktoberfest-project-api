@@ -1,6 +1,5 @@
 package net.oktoberfest.controller;
 
-import net.oktoberfest.model.entities.BeerBrand;
 import net.oktoberfest.model.client.request.BeerBrandRequest;
 import net.oktoberfest.model.client.response.BeerBrandResponse;
 import net.oktoberfest.services.BeerBrandService;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("BeerBrand")
+@RequestMapping("/BeerBrand")
 @AllArgsConstructor
 
 public class BeerBrandController {
@@ -25,8 +24,8 @@ public class BeerBrandController {
             @RequestBody BeerBrandRequest beerBrandRequest) {
 
             return new ResponseEntity<>(
-                this.beerBrandService.createBeerBrand(beerBrandRequest.construct(),
-                HttpStatus.OK));
+                this.beerBrandService.createBeerBrand(beerBrandRequest.construct()).response(),
+                HttpStatus.OK);
     }
 
 }
