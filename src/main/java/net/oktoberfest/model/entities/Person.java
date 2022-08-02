@@ -21,7 +21,7 @@ public class Person {
 
     private int weight;
 
-    private int alcoholToleranceInBlood;
+    private Double alcoholToleranceInBlood;
     private boolean likesMusic;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
@@ -34,7 +34,7 @@ public class Person {
         this.preferredBeerBrand = beerBrandList;
     }
 
-    public Person(int weight, int alcoholToleranceInBlood, boolean likesMusic, List<BeerBrand> preferredBeerBrand) {
+    public Person(int weight, Double alcoholToleranceInBlood, boolean likesMusic, List<BeerBrand> preferredBeerBrand) {
         this.weight = weight;
         this.alcoholToleranceInBlood = alcoholToleranceInBlood;
         this.likesMusic = likesMusic;

@@ -10,7 +10,7 @@ public class PersonResponse implements Response {
 
     public long id;
     public int weight;
-    public int alcoholToleranceInBlood;
+    public Double alcoholToleranceInBlood;
     public boolean likesMusic;
     public List<BeerBrand> preferredBeerBrand;
 
