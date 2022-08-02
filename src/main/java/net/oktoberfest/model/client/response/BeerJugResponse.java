@@ -6,7 +6,7 @@ import net.oktoberfest.model.entities.BeerJug;
 
 public class BeerJugResponse implements Response {
 
-    private long id;
+    public long id;
     public Double beerJugSize;
     public BeerBrand beerBrand;
     
