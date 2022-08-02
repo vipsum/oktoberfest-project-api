@@ -9,7 +9,7 @@ import java.util.List;
 public class PersonRequest {
     
     private int weight;
-    private int alcoholToleranceInBlood;
+    private Double alcoholToleranceInBlood;
     private boolean likesMusic;
     private List<Long> preferredBeerBrand;
 
@@ -18,5 +18,5 @@ public class PersonRequest {
         return new Person(this, beerBrandList);
     }
 
-
+    
 }
