@@ -10,17 +10,17 @@ import net.oktoberfest.services.TentService;
 @Service
 @AllArgsConstructor
 public class TentServiceImpl implements TentService {
-    
+
     private TentRepository tentRepository;
 
-    public  Tent createTent(Tent tent){
+    public Tent createTent(Tent tent) {
 
         return tentRepository.save(tent);
     }
 
-    public Tent findById (long id) {
-        
+    public Tent findById(long id) {
+
         return tentRepository.findById(id);
 
-    }  
+    }
 }

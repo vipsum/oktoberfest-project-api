@@ -28,9 +28,10 @@ public class Tent {
     @JoinColumn(name = "beer_in_tent")
     private BeerJug beerJug;
 
-    //List of people who will be in the reservation list. If ID '1'
-    //is on the list, the person whose that id corresponds to will be able to 
-    //enter the tent. Many people may have reservations, which is why it is a list of people.
+    // List of people who will be in the reservation list. If ID '1'
+    // is on the list, the person whose that id corresponds to will be able to
+    // enter the tent. Many people may have reservations, which is why it is a list
+    // of people.
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "reserved_tent")
@@ -57,8 +58,7 @@ public class Tent {
 
     public TentResponse response() {
         return new TentResponse(this);
-    } 
-    
+    }
 
     @Override
     public String toString() {
