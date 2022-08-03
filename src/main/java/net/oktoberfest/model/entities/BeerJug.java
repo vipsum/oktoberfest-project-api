@@ -23,16 +23,22 @@ public class BeerJug {
     @JoinColumn(name = "beer_brand_id")
     private BeerBrand beerBrand;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "beerjug_owner")
+    private Person owner;
+
     public BeerJug (BeerJugRequest beerJugRequest){
 
         this.beerJugSize = beerJugRequest.getBeerJugSize();
         this.beerBrand = beerJugRequest.getBeerBrand();
+        this.owner = beerJugRequest.getOwner();
 
     }
 
-    public BeerJug(Double beerJugSize, BeerBrand beerBrand){
+    public BeerJug(Double beerJugSize, BeerBrand beerBrand, Person owner){
         this.beerJugSize = beerJugSize;
         this.beerBrand = beerBrand;
+        this.owner = owner;
     }
 
     public BeerJugResponse response() {
