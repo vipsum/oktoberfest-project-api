@@ -1,14 +1,15 @@
 package net.oktoberfest.services.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import lombok.AllArgsConstructor;
 
 import net.oktoberfest.model.entities.BeerJug;
 import net.oktoberfest.repository.BeerJugRepository;
 
 @Service
+@AllArgsConstructor
 public class BeerJugServiceImpl {
-    @Autowired
+    
     private BeerJugRepository beerJugRepository;
     
     public BeerJug createBeerJug(BeerJug beerJug){
