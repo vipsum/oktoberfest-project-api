@@ -1,20 +1,27 @@
 package net.oktoberfest.services.impl;
 
+import org.springframework.stereotype.Service;
+import lombok.AllArgsConstructor;
+
 import net.oktoberfest.model.entities.Person;
 import net.oktoberfest.repository.PersonRepository;
 import net.oktoberfest.services.PersonService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 @Service
+@AllArgsConstructor
 public class PersonServiceImpl implements PersonService {
-    @Autowired
+   
     private  PersonRepository personRepository;
 
     public  Person createPerson(Person person){
 
         return personRepository.save(person);
+
+    }
+
+    public  Person findById(long id) {
+
+        return personRepository.findById(id);
 
     }
 

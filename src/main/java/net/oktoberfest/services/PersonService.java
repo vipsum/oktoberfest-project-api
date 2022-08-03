@@ -4,4 +4,5 @@ import net.oktoberfest.model.entities.Person;
 
 public interface PersonService {
     Person createPerson(Person person);
+    Person findById(long id);
 }
