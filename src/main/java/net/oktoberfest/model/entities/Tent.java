@@ -1,14 +1,20 @@
 package net.oktoberfest.model.entities;
 
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import net.oktoberfest.model.client.request.TentRequest;
 import net.oktoberfest.model.client.response.TentResponse;
 
 import javax.persistence.*;
+
+
 import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "Tent")
 public class Tent {
     @Id
@@ -37,15 +43,15 @@ public class Tent {
     @JoinColumn(name = "reserved_tent")
     private List<Person> reservation;
 
-    public Tent(TentRequest tentRequest) {
+    // public Tent(TentRequest tentRequest) {
 
-        this.maxCapacity = tentRequest.getMaxCapacity();
-        this.currentOccupation = tentRequest.getCurrentOccupation();
-        this.music = tentRequest.isMusic();
-        this.beerJug = tentRequest.getBeerJug();
-        this.reservation = tentRequest.getReservation();
+    //     this.maxCapacity = tentRequest.getMaxCapacity();
+    //     this.currentOccupation = tentRequest.getCurrentOccupation();
+    //     this.music = tentRequest.isMusic();
+    //     this.beerJug = tentRequest.getBeerJug();
+    //     this.reservation = tentRequest.getReservation();
 
-    }
+    // }
 
     public Tent(List<Person> currentOccupation, int maxCapacity, boolean music, BeerJug beerJug,
             List<Person> reservation) {
@@ -56,6 +62,8 @@ public class Tent {
         this.reservation = reservation;
     }
 
+   
+    
     public TentResponse response() {
         return new TentResponse(this);
     }

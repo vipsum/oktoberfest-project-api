@@ -1,6 +1,8 @@
 package net.oktoberfest.model.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+
 import net.oktoberfest.model.client.request.BeerJugRequest;
 import net.oktoberfest.model.client.response.BeerJugResponse;
 
@@ -10,6 +12,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "BeerJug")
+@AllArgsConstructor
 public class BeerJug {
     @Id
     @Column(name = "BeerJugId")
@@ -34,6 +37,8 @@ public class BeerJug {
         this.owner = beerJugRequest.getOwner();
 
     }
+
+    
 
     public BeerJug(Double beerJugSize, BeerBrand beerBrand, Person owner){
         this.beerJugSize = beerJugSize;

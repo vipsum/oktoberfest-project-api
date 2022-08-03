@@ -20,9 +20,11 @@ public class Person {
     private long id;
 
     private int weight;
-
+    //aguante
     private Double alcoholToleranceInBlood;
+
     private boolean likesMusic;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
     private List<BeerBrand> preferredBeerBrand;

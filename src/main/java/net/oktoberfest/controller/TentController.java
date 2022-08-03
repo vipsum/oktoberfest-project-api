@@ -13,7 +13,7 @@ import net.oktoberfest.model.client.response.TentResponse;
 import net.oktoberfest.services.TentService;
 
 @RestController
-@RequestMapping("/RegisterTent")
+@RequestMapping("/Tent")
 @AllArgsConstructor
 public class TentController {
 

@@ -11,10 +11,11 @@ import net.oktoberfest.model.entities.Tent;
 public class TentRequest {
 
     private int maxCapacity;
-    private List<Person> currentOccupation;
+    private List<Long> currentOccupation;
     private boolean music;
-    private BeerJug beerJug;
-    private List<Person> reservation;
+    private Integer beerJug;
+    private List<Long> reservation;
+    
 
     public Tent construct() {
         return new Tent(this);

@@ -11,18 +11,18 @@ import net.oktoberfest.services.BeerBrandService;
 @Service
 @AllArgsConstructor
 public class BeerBrandServiceImpl implements BeerBrandService {
-    
+
     private BeerBrandRepository beerBrandRepository;
 
-    public BeerBrand createBeerBrand(BeerBrand beerBrand){
+    public BeerBrand createBeerBrand(BeerBrand beerBrand) {
 
         return beerBrandRepository.save(beerBrand);
 
     }
 
-    public List<BeerBrand> getBeerBrandsFromIdList(List<Long> beerBrandIdList){
+    public List<BeerBrand> getBeerBrandsFromIdList(List<Long> beerBrandIdList) {
 
-       return beerBrandRepository.findAllById_In(beerBrandIdList);
+        return beerBrandRepository.findAllById_In(beerBrandIdList);
 
     }
 
