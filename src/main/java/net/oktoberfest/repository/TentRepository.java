@@ -8,6 +8,7 @@ import net.oktoberfest.model.entities.Tent;
 
 @Repository
 public interface TentRepository extends JpaRepository<Tent, Long>{
-    Tent findById(long id);
     
+    Tent findById(long id);
+
 }

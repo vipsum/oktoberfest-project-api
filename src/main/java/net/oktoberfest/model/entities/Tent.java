@@ -1,6 +1,8 @@
 package net.oktoberfest.model.entities;
 
 import lombok.Data;
+import net.oktoberfest.model.client.request.TentRequest;
+import net.oktoberfest.model.client.response.TentResponse;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,7 +20,7 @@ public class Tent {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "current_tent")
-    public List<Person> currentOccupation;
+    private List<Person> currentOccupation;
 
     private boolean music;
 
@@ -34,7 +36,13 @@ public class Tent {
     @JoinColumn(name = "reserved_tent")
     private List<Person> reservation;
 
-    public Tent() {
+    public Tent(TentRequest tentRequest) {
+
+        this.maxCapacity = tentRequest.getMaxCapacity();
+        this.currentOccupation = tentRequest.getCurrentOccupation();
+        this.music = tentRequest.isMusic();
+        this.beerJug = tentRequest.getBeerJug();
+        this.reservation = tentRequest.getReservation();
 
     }
 
@@ -46,6 +54,11 @@ public class Tent {
         this.beerJug = beerJug;
         this.reservation = reservation;
     }
+
+    public TentResponse response() {
+        return new TentResponse(this);
+    } 
+    
 
     @Override
     public String toString() {
