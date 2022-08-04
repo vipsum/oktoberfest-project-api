@@ -16,14 +16,14 @@ import net.oktoberfest.services.PersonService;
 import net.oktoberfest.services.TentService;
 
 @RestController
-@RequestMapping("/Tent")
+@RequestMapping("/tent")
 @AllArgsConstructor
 public class TentController {
 
     private final TentService tentService;
     private final PersonService personService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<TentResponse> createTent(
             @RequestBody TentRequest tentRequest) {
 
