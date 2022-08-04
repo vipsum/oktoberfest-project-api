@@ -4,7 +4,9 @@ package net.oktoberfest.model.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.oktoberfest.model.client.request.ShowTentRequest;
 import net.oktoberfest.model.client.request.TentRequest;
+import net.oktoberfest.model.client.response.ShowTentResponse;
 import net.oktoberfest.model.client.response.TentResponse;
 
 import javax.persistence.*;
@@ -20,7 +22,7 @@ public class Tent {
     @Id
     @Column(name = "tent_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    public long id;
 
     private int maxCapacity;
 
@@ -62,7 +64,9 @@ public class Tent {
         this.reservation = reservation;
     }
 
-   
+   public ShowTentResponse showTentresponse(){
+    return new ShowTentResponse(tents);
+   }
     
     public TentResponse response() {
         return new TentResponse(this);

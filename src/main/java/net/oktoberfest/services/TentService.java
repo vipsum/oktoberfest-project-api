@@ -8,6 +8,6 @@ public interface TentService {
     Tent createTent(Tent tent);
 
     Tent findById(long id);
-    
+
     List<Tent> showTent(Integer person_id);
 }

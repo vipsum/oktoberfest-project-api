@@ -5,5 +5,9 @@ import lombok.Data;
 
 @Data
 public class ShowTentRequest {
-    private int id;
+    private int personId;
+
+    public int construct() {
+        return personId;
+    }
 }

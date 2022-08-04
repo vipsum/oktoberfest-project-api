@@ -28,7 +28,7 @@ public class TentServiceImpl implements TentService {
 
     public List<Tent> showTent(Integer person_id){
         //ESTO TIRA ERROR
-        return tentRepository.findById(id);
+        return tentRepository.findAll();
     }
     /*
  * public class TentServiceImpl implements TentService {
