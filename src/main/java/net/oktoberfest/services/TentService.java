@@ -9,5 +9,5 @@ public interface TentService {
 
     Tent findById(long id);
 
-    List<Tent> showTent(Integer person_id);
+    List<Tent> getAllTentsForPerson(Long person_id);
 }

@@ -1,17 +1,12 @@
 package net.oktoberfest.model.entities;
 
 
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.oktoberfest.model.client.request.ShowTentRequest;
 import net.oktoberfest.model.client.request.TentRequest;
-import net.oktoberfest.model.client.response.ShowTentResponse;
 import net.oktoberfest.model.client.response.TentResponse;
-
 import javax.persistence.*;
-
-
 import java.util.List;
 
 @Data
@@ -64,9 +59,7 @@ public class Tent {
         this.reservation = reservation;
     }
 
-   public ShowTentResponse showTentresponse(){
-    return new ShowTentResponse(tents);
-   }
+  
     
     public TentResponse response() {
         return new TentResponse(this);
