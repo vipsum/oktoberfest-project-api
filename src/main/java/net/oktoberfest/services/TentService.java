@@ -1,10 +1,13 @@
 package net.oktoberfest.services;
 
-import net.oktoberfest.model.client.request.TentRequest;
+import java.util.List;
+
 import net.oktoberfest.model.entities.Tent;
 
 public interface TentService {
-    Tent createTent(TentRequest tent);
+    Tent createTent(Tent tent);
 
     Tent findById(long id);
+    
+    List<Tent> showTent(Integer person_id);
 }

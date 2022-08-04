@@ -43,15 +43,15 @@ public class Tent {
     @JoinColumn(name = "reserved_tent")
     private List<Person> reservation;
 
-    // public Tent(TentRequest tentRequest) {
+    public Tent(TentRequest tentRequest) {
 
-    //     this.maxCapacity = tentRequest.getMaxCapacity();
-    //     this.currentOccupation = tentRequest.getCurrentOccupation();
-    //     this.music = tentRequest.isMusic();
-    //     this.beerJug = tentRequest.getBeerJug();
-    //     this.reservation = tentRequest.getReservation();
+        this.maxCapacity = tentRequest.getMaxCapacity();
+        //this.currentOccupation = tentRequest.getCurrentOccupation();
+        this.music = tentRequest.isMusic();
+        //this.beerJug = tentRequest.getBeerJug();
+       // this.reservation = tentRequest.getReservation();
 
-    // }
+    }
 
     public Tent(List<Person> currentOccupation, int maxCapacity, boolean music, BeerJug beerJug,
             List<Person> reservation) {
