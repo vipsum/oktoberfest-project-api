@@ -19,7 +19,7 @@ public class PersonServiceImpl implements PersonService {
 
     }
 
-    public  Person findById(long id) {
+    public  Person getPersonById(long id) {
 
         return personRepository.findById(id);
 
