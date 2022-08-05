@@ -20,7 +20,7 @@ public class TentServiceImpl implements TentService {
         return tentRepository.save(tent);
     }
 
-    public Tent findById (long id) {
+    public Tent getTentByIdForPerson (long id) {
         
         return tentRepository.findById(id);
 
