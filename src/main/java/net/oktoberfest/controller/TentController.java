@@ -48,9 +48,9 @@ public class TentController {
                 , HttpStatus.OK);
     }
 
-    @PostMapping ("/enterTent")
-    public ResponseEntity<List<TentResponse>> getPersonById(
-        @RequestBody 
+    @PostMapping ("/enter")
+    public ResponseEntity<TentResponse> getPersonById(
+        @RequestBody  
     )
 
     

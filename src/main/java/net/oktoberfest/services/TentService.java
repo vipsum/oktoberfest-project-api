@@ -7,7 +7,9 @@ import net.oktoberfest.model.entities.Tent;
 public interface TentService {
     Tent createTent(Tent tent);
 
-    Tent findById(long id);
+    Tent getTentByIdForPerson(long id);
 
     List<Tent> getAllTentsForPerson(Long person_id);
+
+    // List<Tent> addPersonToTent(Long person_id, Long tent_id);
 }
