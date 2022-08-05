@@ -2,6 +2,7 @@ package net.oktoberfest.services;
 
 import java.util.List;
 
+import net.oktoberfest.model.entities.Person;
 import net.oktoberfest.model.entities.Tent;
 
 public interface TentService {
@@ -11,5 +12,7 @@ public interface TentService {
 
     List<Tent> getAllTentsForPerson(Long person_id);
 
-    // List<Tent> addPersonToTent(Long person_id, Long tent_id);
+    Person addPersonToTent(Long tent_id,Long person_id);
+
+    List<Person> getAllPerson(Long tent_id);
 }

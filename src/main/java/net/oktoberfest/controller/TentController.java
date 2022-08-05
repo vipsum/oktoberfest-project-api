@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
 import net.oktoberfest.model.client.request.TentRequest;
+import net.oktoberfest.model.client.response.PersonResponse;
 import net.oktoberfest.model.client.response.TentResponse;
 import net.oktoberfest.model.entities.Tent;
 import net.oktoberfest.services.PersonService;
@@ -48,10 +49,12 @@ public class TentController {
                 , HttpStatus.OK);
     }
 
-    @PostMapping ("/enter")
-    public ResponseEntity<TentResponse> getPersonById(
-        @RequestBody  
-    )
+    @PostMapping ("/enter/{tent_id}/person/{person_id}")
+    public ResponseEntity<PersonResponse> getPersonById(
+        @PathVariable Long tent_id, @PathVariable Long person_id){
+
+           return new ResponseEntity<>(tentService.addPersonToTent( tent_id,person_id).response(),HttpStatus.OK);
+        }
 
     
 

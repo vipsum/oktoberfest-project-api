@@ -12,5 +12,5 @@ public interface TentRepository extends JpaRepository<Tent, Long> {
 
     Tent findById(long id);
     List<Tent> findAll();
-
+   
 }

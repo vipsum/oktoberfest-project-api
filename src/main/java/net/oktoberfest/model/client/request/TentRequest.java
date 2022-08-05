@@ -11,7 +11,7 @@ import net.oktoberfest.model.entities.Tent;
 public class TentRequest {
 
     private int maxCapacity;
-   // private List<Long> currentOccupation;
+    private List<Long> currentOccupation;
     private boolean music;
     private Integer beerJug;
    // private List<Long> reservation;
