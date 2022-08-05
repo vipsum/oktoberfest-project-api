@@ -47,17 +47,16 @@ public class TentController {
                 .collect(Collectors.toList())
                 , HttpStatus.OK);
     }
-    /*
-     *     @GetMapping("/findByDni/{dni}")
-    public Person findByDni(@PathVariable int dni){
-        return personRepository.findByDni(dni);
-    }
-     */
+
+    @PostMapping ("/enterTent")
+    public ResponseEntity<List<TentResponse>> getPersonById(
+        @RequestBody 
+    )
+
+    
 
 
-    // @PostMapping
-    // public ResponseEntity<TentResponse> enterTent(
-    //     @RequestBody TentRequest tentRequest) {
-    //         return n
-    //     }
+
+
+
 }
