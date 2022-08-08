@@ -36,15 +36,19 @@ public class TentServiceImpl implements TentService {
         return tentRepository.findAll();
     }
 
-    public Person addPersonToTent( Long tent_id,Long person_id){
-        
+    public Tent addPersonToTent( Long tent_id,Long person_id){
+        //grabbing person and tent ids
         Person person = personService.getPersonById(person_id);
         Tent tent = getTentByIdForPerson(tent_id);
+        //getting list of persons in db through personList
         List<Person> personList = getAllPerson(tent_id);
+        //adding my new person to the list
+        //setting the currentOccupation to personList
         personList.add(person);
         tent.setCurrentOccupation(personList);
+        //saving the tent 
         tentRepository.save(tent);
-        return person;
+        return tent;
 
     }
 
@@ -54,6 +58,8 @@ public class TentServiceImpl implements TentService {
        List<Person> personList = tent.get().getCurrentOccupation();
         return personList;
     }
+
+
 
 
     /*
