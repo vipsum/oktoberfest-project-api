@@ -16,4 +16,5 @@ public interface TentService {
 
     List<Person> getAllPerson(Long tent_id);
     
+    
 }

@@ -38,8 +38,6 @@ public class BeerJug {
 
     }
 
-    
-
     public BeerJug(Double beerJugSize, BeerBrand beerBrand, Person owner){
         this.beerJugSize = beerJugSize;
         this.beerBrand = beerBrand;
@@ -49,6 +47,7 @@ public class BeerJug {
     public BeerJugResponse response() {
         return new BeerJugResponse(this);
     }
+
 
     @Override
     public String toString() {return "BeerJug Id: " + id;

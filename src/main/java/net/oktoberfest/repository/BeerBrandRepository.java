@@ -12,5 +12,5 @@ import net.oktoberfest.model.entities.BeerBrand;
 public interface BeerBrandRepository extends JpaRepository<BeerBrand, Long>{
 
     List<BeerBrand> findAllById_In(List<Long> beerBrandIdList);
-
+    BeerBrand findBybeerName(String beerName);
 }

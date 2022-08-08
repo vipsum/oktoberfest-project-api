@@ -50,7 +50,7 @@ public class TentController {
     }
 
     @PostMapping ("/enter/{tent_id}/person/{person_id}")
-    public ResponseEntity<PersonResponse> getPersonById(
+    public ResponseEntity<TentResponse> getPersonById(
         @PathVariable Long tent_id, @PathVariable Long person_id){
 
            return new ResponseEntity<>(tentService.addPersonToTent( tent_id,person_id).response(),HttpStatus.OK);

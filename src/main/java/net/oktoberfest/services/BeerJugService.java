@@ -7,4 +7,6 @@ public interface BeerJugService {
     
     BeerJug createBeerJug(BeerJug beerJug);
    // public Double calcAlcohoInBlood(Person owner);
+
+
 }
