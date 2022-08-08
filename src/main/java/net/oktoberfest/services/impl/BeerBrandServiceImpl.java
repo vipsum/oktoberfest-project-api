@@ -27,7 +27,7 @@ public class BeerBrandServiceImpl implements BeerBrandService {
     }
 
     public BeerBrand getBeerBrandByBeerName(String beerName){
-        return beerBrandRepository.findBybeerName(beerName);
+        return beerBrandRepository.findByName(beerName);
     }
 
 }

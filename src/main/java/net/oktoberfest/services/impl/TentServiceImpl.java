@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import net.oktoberfest.model.entities.BeerBrand;
 import net.oktoberfest.model.entities.BeerJug;
 import net.oktoberfest.model.entities.Person;
@@ -18,7 +19,7 @@ import net.oktoberfest.services.PersonService;
 import net.oktoberfest.services.TentService;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class TentServiceImpl implements TentService {
     
     private TentRepository tentRepository;
@@ -43,19 +44,23 @@ public class TentServiceImpl implements TentService {
     }
 
     public Tent addPersonToTent( Long tent_id,Long person_id){
+        Double beerJugSize = (double) 500;
+        BeerBrand beerBrand = beerBrandService.getBeerBrandByBeerName("Patagonia");
+        
         //grabbing person and tent ids
         Person person = personService.getPersonById(person_id);
         Tent tent = getTentByIdForPerson(tent_id);
-        Double beerJugSize = (double) 500;
-        BeerBrand beerBrand = beerBrandService.getBeerBrandByBeerName("Patagonia");
         //getting list of persons in db through personList
         List<Person> personList = getAllPerson(tent_id);
         //adding my new person to the list
         personList.add(person);
         //setting the currentOccupation to personList
         tent.setCurrentOccupation(personList);
+
         BeerJug beerJug = new BeerJug(beerJugSize, beerBrand, person);
         beerJug = beerJugService.createBeerJug(beerJug);
+        List<BeerJug> beerJugList = 
+        beerJug.add();
         //saving the tent 
         tentRepository.save(tent);
         return tent;
