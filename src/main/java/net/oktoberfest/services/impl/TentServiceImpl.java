@@ -45,23 +45,27 @@ public class TentServiceImpl implements TentService {
 
     public Tent addPersonToTent( Long tent_id,Long person_id){
         Double beerJugSize = (double) 500;
-        BeerBrand beerBrand = beerBrandService.getBeerBrandByBeerName("Patagonia");
         
         //grabbing person and tent ids
         Person person = personService.getPersonById(person_id);
         Tent tent = getTentByIdForPerson(tent_id);
+
         //getting list of persons in db through personList
         List<Person> personList = tent.getCurrentOccupation();
+
         //adding my new person to the list
         personList.add(person);
+
         //setting the currentOccupation to personList
         tent.setCurrentOccupation(personList);
-       
+
+        BeerBrand beerBrand = beerBrandService.getBeerBrandByBeerName("Patagonia");
         BeerJug beerJug = new BeerJug(beerJugSize, beerBrand, person);
         beerJug = beerJugService.createBeerJug(beerJug);
         List<BeerJug> beerJugList = tent.getBoughtBeerJugs();
         beerJugList.add(beerJug);
         tent.setBoughtBeerJugs(beerJugList);
+
         //saving the tent 
         tentRepository.save(tent);
         return tent;
