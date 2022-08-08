@@ -15,6 +15,7 @@ public class TentResponse implements Response {
     public boolean music;
     public BeerJug beerJug;
     public List<Person> reservation;
+    public List<BeerJug> boughtBeerJugs;
 
     public TentResponse(Tent tent) {
         this.id = tent.getId();
@@ -23,6 +24,7 @@ public class TentResponse implements Response {
         this.music = tent.isMusic();
         this.beerJug = tent.getBeerJug();
         this.reservation = tent.getReservation();
+        this.boughtBeerJugs = tent.getBoughtBeerJugs();
     }
 
 }

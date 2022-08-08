@@ -17,6 +17,7 @@ import net.oktoberfest.model.client.request.TentRequest;
 import net.oktoberfest.model.client.response.PersonResponse;
 import net.oktoberfest.model.client.response.TentResponse;
 import net.oktoberfest.model.entities.Tent;
+import net.oktoberfest.services.BeerBrandService;
 import net.oktoberfest.services.PersonService;
 import net.oktoberfest.services.TentService;
 
@@ -27,6 +28,7 @@ public class TentController {
 
     private final TentService tentService;
     private final PersonService personService;
+    private final BeerBrandService beerBrandService;
 
     @PostMapping("/create")
     public ResponseEntity<TentResponse> createTent(
@@ -53,7 +55,10 @@ public class TentController {
     public ResponseEntity<TentResponse> getPersonById(
         @PathVariable Long tent_id, @PathVariable Long person_id){
 
-           return new ResponseEntity<>(tentService.addPersonToTent( tent_id,person_id).response(),HttpStatus.OK);
+           return new ResponseEntity<>(
+            tentService.addPersonToTent(tent_id,person_id)
+            .response(),
+            HttpStatus.OK);
         }
 
     

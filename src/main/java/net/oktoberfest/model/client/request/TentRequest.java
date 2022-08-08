@@ -3,8 +3,8 @@ package net.oktoberfest.model.client.request;
 import java.util.List;
 
 import lombok.Data;
-import net.oktoberfest.model.entities.BeerJug;
-import net.oktoberfest.model.entities.Person;
+// import net.oktoberfest.model.entities.BeerJug;
+// import net.oktoberfest.model.entities.Person;
 import net.oktoberfest.model.entities.Tent;
 
 @Data

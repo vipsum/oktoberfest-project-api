@@ -21,7 +21,7 @@ public class PersonServiceImpl implements PersonService {
 
     public  Person getPersonById(long id) {
 
-        return personRepository.findById(id);
+        return personRepository.findById(id).orElseThrow();
 
     }
 

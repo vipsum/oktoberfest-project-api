@@ -1,17 +1,19 @@
 package net.oktoberfest.services.impl;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
+// import java.util.Optional;
 
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import lombok.NoArgsConstructor;
+// import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import net.oktoberfest.model.entities.BeerBrand;
 import net.oktoberfest.model.entities.BeerJug;
 import net.oktoberfest.model.entities.Person;
 import net.oktoberfest.model.entities.Tent;
-import net.oktoberfest.repository.PersonRepository;
+// import net.oktoberfest.repository.PersonRepository;
 import net.oktoberfest.repository.TentRepository;
 import net.oktoberfest.services.BeerBrandService;
 import net.oktoberfest.services.BeerJugService;
@@ -19,13 +21,13 @@ import net.oktoberfest.services.PersonService;
 import net.oktoberfest.services.TentService;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class TentServiceImpl implements TentService {
     
-    private TentRepository tentRepository;
-    private PersonService personService;
-    private BeerJugService beerJugService;
-    private BeerBrandService beerBrandService;
+    private final TentRepository tentRepository;
+    private final PersonService personService;
+    private final BeerJugService beerJugService;
+    private final BeerBrandService beerBrandService;
 
     public  Tent createTent(Tent tent){
 

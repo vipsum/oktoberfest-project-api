@@ -2,6 +2,7 @@ package net.oktoberfest.services.impl;
 
 //import java.util.List;
 
+import net.oktoberfest.services.BeerJugService;
 import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 
@@ -11,7 +12,7 @@ import net.oktoberfest.repository.BeerJugRepository;
 
 @Service
 @AllArgsConstructor
-public class BeerJugServiceImpl {
+public class BeerJugServiceImpl implements BeerJugService {
     
     private BeerJugRepository beerJugRepository;
     

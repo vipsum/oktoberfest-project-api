@@ -2,7 +2,7 @@ package net.oktoberfest.services;
 
 import java.util.List;
 
-import net.oktoberfest.model.entities.Person;
+// import net.oktoberfest.model.entities.Person;
 import net.oktoberfest.model.entities.Tent;
 
 public interface TentService {
