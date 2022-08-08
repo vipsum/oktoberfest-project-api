@@ -38,7 +38,7 @@ public class TentServiceImpl implements TentService {
 
     public Person addPersonToTent( Long tent_id,Long person_id){
         
-        Person person = personService.getPersonId(person_id);
+        Person person = personService.getPersonById(person_id);
         Tent tent = getTentByIdForPerson(tent_id);
         List<Person> personList = getAllPerson(tent_id);
         personList.add(person);

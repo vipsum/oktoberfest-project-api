@@ -40,6 +40,10 @@ public class Tent {
     @JoinColumn(name = "reserved_tent")
     private List<Person> reservation;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bought_beerjugs")
+    private List<BeerJug> boughtBeerJugs;
+
     public Tent(TentRequest tentRequest) {
 
         this.maxCapacity = tentRequest.getMaxCapacity();
