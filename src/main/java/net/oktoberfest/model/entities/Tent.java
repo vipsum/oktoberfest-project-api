@@ -55,12 +55,13 @@ public class Tent {
     }
 
     public Tent(List<Person> currentOccupation, int maxCapacity, boolean music, BeerJug beerJug,
-            List<Person> reservation) {
+            List<Person> reservation,List<BeerJug> boughtBeerJugs) {
         this.maxCapacity = maxCapacity;
         this.currentOccupation = currentOccupation;
         this.music = music;
         this.beerJug = beerJug;
         this.reservation = reservation;
+        this.boughtBeerJugs = boughtBeerJugs;
     }
 
   
