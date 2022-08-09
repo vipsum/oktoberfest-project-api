@@ -1,19 +1,13 @@
 package net.oktoberfest.services.impl;
 
 import java.util.List;
-// import java.util.Optional;
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import lombok.NoArgsConstructor;
-// import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import net.oktoberfest.model.entities.BeerBrand;
 import net.oktoberfest.model.entities.BeerJug;
 import net.oktoberfest.model.entities.Person;
 import net.oktoberfest.model.entities.Tent;
-// import net.oktoberfest.repository.PersonRepository;
 import net.oktoberfest.repository.TentRepository;
 import net.oktoberfest.services.BeerBrandService;
 import net.oktoberfest.services.BeerJugService;
@@ -29,7 +23,14 @@ public class TentServiceImpl implements TentService {
     private final BeerJugService beerJugService;
     private final BeerBrandService beerBrandService;
 
-    public  Tent createTent(Tent tent){
+    public  Tent createTent(Tent tent, BeerJug beerJug){
+
+        tent.setBeerJug(beerJug);
+
+        //.getBeerBrand().getId();
+//  BeerBrand beerBrandObject = beerBrandService.getBeerBrandById(beerBrandId);
+// beerBrandObject.setBeerName(beerBrandObject.getBeerName());
+//        beerBrandObject.setAlcoholPercentage(beerBrandObject.getAlcoholPercentage());
 
         return tentRepository.save(tent);
     }
@@ -60,19 +61,21 @@ public class TentServiceImpl implements TentService {
 
         //setting the currentOccupation to personList
         tent.setCurrentOccupation(personList);
-
-        BeerBrand beerBrand = beerBrandService.getBeerBrandByBeerName("Patagonia");
-        BeerJug beerJug = new BeerJug(beerJugSize, beerBrand, person);
-        beerJug = beerJugService.createBeerJug(beerJug);
-        List<BeerJug> beerJugList = tent.getBoughtBeerJugs();
-        beerJugList.add(beerJug);
-        tent.setBoughtBeerJugs(beerJugList);
+        tent.getBeerJug().setOwner(person);
+        tent.getBoughtBeerJugs().add(tent.getBeerJug());
 
         //saving the tent 
         tentRepository.save(tent);
         return tent;
 
     }
+
+
+//    @Override
+//    public List<Tent> getTentsForPersonByPreference(Long personId) {
+//
+//        return null;
+//    }
 
     // @Override
     // public List<Person> getAllPerson(Long tent_id) {

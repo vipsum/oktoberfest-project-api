@@ -3,6 +3,7 @@ package net.oktoberfest.model.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import lombok.NoArgsConstructor;
 import net.oktoberfest.model.client.request.BeerJugRequest;
 import net.oktoberfest.model.client.response.BeerJugResponse;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "BeerJug")
 @AllArgsConstructor
+@NoArgsConstructor
 public class BeerJug {
     @Id
     @Column(name = "BeerJugId")
@@ -30,15 +32,13 @@ public class BeerJug {
     @JoinColumn(name = "beerjug_owner")
     private Person owner;
 
-    public BeerJug (BeerJugRequest beerJugRequest){
+    public BeerJug(BeerJugRequest beerJugRequest) {
 
         this.beerJugSize = beerJugRequest.getBeerJugSize();
-        this.beerBrand = beerJugRequest.getBeerBrand();
-        this.owner = beerJugRequest.getOwner();
 
     }
 
-    public BeerJug(Double beerJugSize, BeerBrand beerBrand, Person owner){
+    public BeerJug(Double beerJugSize, BeerBrand beerBrand, Person owner) {
         this.beerJugSize = beerJugSize;
         this.beerBrand = beerBrand;
         this.owner = owner;
@@ -50,7 +50,8 @@ public class BeerJug {
 
 
     @Override
-    public String toString() {return "BeerJug Id: " + id;
+    public String toString() {
+        return "BeerJug Id: " + id;
     }
 }
 

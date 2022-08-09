@@ -13,4 +13,6 @@ public interface BeerBrandRepository extends JpaRepository<BeerBrand, Long>{
 
     List<BeerBrand> findAllById_In(List<Long> beerBrandIdList);
     BeerBrand findByBeerName(String beerName);
+
+    BeerBrand findById(long id);
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import net.oktoberfest.model.client.request.TentRequest;
 import net.oktoberfest.model.client.response.TentResponse;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -47,10 +48,10 @@ public class Tent {
     public Tent(TentRequest tentRequest) {
 
         this.maxCapacity = tentRequest.getMaxCapacity();
-        //this.currentOccupation = tentRequest.getCurrentOccupation();
+        this.currentOccupation = new ArrayList<>();
         this.music = tentRequest.isMusic();
-        //this.beerJug = tentRequest.getBeerJug();
-       // this.reservation = tentRequest.getReservation();
+        this.reservation = new ArrayList<>();
+        this.boughtBeerJugs = new ArrayList<>();
 
     }
 

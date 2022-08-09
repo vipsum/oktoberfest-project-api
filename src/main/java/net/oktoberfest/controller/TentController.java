@@ -3,6 +3,8 @@ package net.oktoberfest.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import net.oktoberfest.model.entities.BeerJug;
+import net.oktoberfest.services.BeerJugService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,13 +31,16 @@ public class TentController {
     private final TentService tentService;
     private final PersonService personService;
     private final BeerBrandService beerBrandService;
+    private final BeerJugService beerJugService;
 
     @PostMapping("/create")
     public ResponseEntity<TentResponse> createTent(
             @RequestBody TentRequest tentRequest) {
 
+        BeerJug beerJug = beerJugService.createBeerJug(tentRequest.getBeerJug());
+
         return new ResponseEntity<>(
-                this.tentService.createTent(tentRequest.construct()).response(),
+                this.tentService.createTent(tentRequest.construct(), beerJug).response(),
                 HttpStatus.OK);
     }
     
@@ -50,6 +55,18 @@ public class TentController {
                 .collect(Collectors.toList())
                 , HttpStatus.OK);
     }
+
+//    @GetMapping("/showTentsById/{personId}")
+//    public ResponseEntity<List<TentResponse>> getTentsForPersonByPreference(
+//            @PathVariable Long personId) {
+//
+//        return new ResponseEntity<>(
+//                this.tentService.getTentsForPersonByPreference(personId)
+//                        .stream()
+//                        .map(Tent::response)
+//                        .collect(Collectors.toList())
+//                        ,HttpStatus.OK);
+//    }
 
     @PostMapping ("/enter/{tent_id}/person/{person_id}")
     public ResponseEntity<TentResponse> getPersonById(

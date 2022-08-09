@@ -12,7 +12,7 @@ public class Games {
     @Id
     @Column(name = "GamesId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "GamesId")
