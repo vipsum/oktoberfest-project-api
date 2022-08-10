@@ -19,11 +19,6 @@ public interface TentService {
 
     List<BeerBrand> getPersonPreferredBeerBrands(long person_id);
 
-
-//   List<Tent> getTentsForPersonByPreferredBeerBrand(Long personId);
-
-   List<Tent> getTentsForPersonByPreferences(Long person_id);
-    // List<Person> getAllPerson(Long tent_id);
-
+   List<Tent> getTentsForPersonByPreferences(Long personId);
     
 }

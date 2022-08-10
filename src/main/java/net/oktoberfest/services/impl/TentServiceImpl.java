@@ -84,12 +84,12 @@ public class TentServiceImpl implements TentService {
 //    }
 
     @Override
-    public List<Tent> getTentsForPersonByPreferences(Long person_id) {
+    public List<Tent> getTentsForPersonByPreferences(Long personId) {
         //getting person by id
-        Person person = personService.getPersonById(person_id);
+        Person person = personService.getPersonById(personId);
         //getting person  preferences
         boolean personLikesMusic = person.isLikesMusic();
-        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(person_id);
+        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(personId);
 
         List<Tent> tentsWithPersonMusicPreferences =  tentRepository.findAllByMusic(personLikesMusic);
 //        List<String> namesList = personList.stream()

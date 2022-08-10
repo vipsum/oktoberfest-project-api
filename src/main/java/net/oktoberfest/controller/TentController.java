@@ -56,17 +56,17 @@ public class TentController {
                 , HttpStatus.OK);
     }
 
-//    @GetMapping("/showTentsById/{personId}")
-//    public ResponseEntity<List<TentResponse>> getTentsForPersonByPreference(
-//            @PathVariable Long personId) {
-//
-//        return new ResponseEntity<>(
-//                this.tentService.getTentsForPersonByPreference(personId)
-//                        .stream()
-//                        .map(Tent::response)
-//                        .collect(Collectors.toList())
-//                        ,HttpStatus.OK);
-//    }
+    @GetMapping("/showTentsById/{personId}")
+    public ResponseEntity<List<TentResponse>> getTentsForPersonByPreferences(
+            @PathVariable Long personId) {
+
+        return new ResponseEntity<>(
+                this.tentService.getTentsForPersonByPreferences(personId)
+                        .stream()
+                        .map(Tent::response)
+                        .collect(Collectors.toList())
+                        ,HttpStatus.OK);
+    }
 
     @PostMapping ("/enter/{tent_id}/person/{person_id}")
     public ResponseEntity<TentResponse> getPersonById(
