@@ -23,15 +23,9 @@ public class TentServiceImpl implements TentService {
     private final BeerJugService beerJugService;
     private final BeerBrandService beerBrandService;
 
-    public  Tent createTent(Tent tent, BeerJug beerJug){
+    public  Tent createTentAndBeerJug(Tent tent, BeerJug beerJug){
 
         tent.setBeerJug(beerJug);
-
-        //.getBeerBrand().getId();
-//  BeerBrand beerBrandObject = beerBrandService.getBeerBrandById(beerBrandId);
-// beerBrandObject.setBeerName(beerBrandObject.getBeerName());
-//        beerBrandObject.setAlcoholPercentage(beerBrandObject.getAlcoholPercentage());
-
         return tentRepository.save(tent);
     }
 
@@ -44,10 +38,10 @@ public class TentServiceImpl implements TentService {
     public List<Tent> getAllTentsForPerson(Long person_id){
        
         return tentRepository.findAll();
+
     }
 
     public Tent addPersonToTent( Long tent_id,Long person_id){
-        Double beerJugSize = (double) 500;
         
         //grabbing person and tent ids
         Person person = personService.getPersonById(person_id);
@@ -70,12 +64,35 @@ public class TentServiceImpl implements TentService {
 
     }
 
+    @Override
+    public List<BeerBrand> getPersonPreferredBeerBrands(long person_id) {
 
-//    @Override
-//    public List<Tent> getTentsForPersonByPreference(Long personId) {
-//
-//        return null;
-//    }
+        return personService.getPersonById(person_id).getPreferredBeerBrand();
+    }
+
+    @Override
+    public List<Tent> getTentsForPersonByPreferredBeerBrand(Long personId) {
+
+        Person person = personService.getPersonById(personId);
+
+        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(personId);
+        boolean personLikesMusic = person.isLikesMusic();
+
+//        if(personLikesMusic) {
+//           tentRepository.findTentByMusicIsTrue(true);
+//        }
+
+       return null;
+    }
+
+    @Override
+    public List<Tent> getTentsForPersonByPreferences(Long person_id) {
+        List<BeerBrand>  personPreferredBeerBrands = getPersonPreferredBeerBrands(person_id);
+
+
+        return null;
+    }
+
 
     // @Override
     // public List<Person> getAllPerson(Long tent_id) {

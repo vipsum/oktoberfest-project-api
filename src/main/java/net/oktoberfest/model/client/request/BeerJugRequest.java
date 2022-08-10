@@ -14,6 +14,7 @@ public class BeerJugRequest {
         private Long beerBrandId;
 
         public BeerJug construct() {
+
             return new BeerJug(this);
         }
 }

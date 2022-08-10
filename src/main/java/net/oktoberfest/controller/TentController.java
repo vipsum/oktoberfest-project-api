@@ -34,13 +34,13 @@ public class TentController {
     private final BeerJugService beerJugService;
 
     @PostMapping("/create")
-    public ResponseEntity<TentResponse> createTent(
+    public ResponseEntity<TentResponse> createTentAndBeerJug(
             @RequestBody TentRequest tentRequest) {
 
         BeerJug beerJug = beerJugService.createBeerJug(tentRequest.getBeerJug());
 
         return new ResponseEntity<>(
-                this.tentService.createTent(tentRequest.construct(), beerJug).response(),
+                this.tentService.createTentAndBeerJug(tentRequest.construct(), beerJug).response(),
                 HttpStatus.OK);
     }
     
