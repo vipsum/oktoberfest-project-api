@@ -70,31 +70,33 @@ public class TentServiceImpl implements TentService {
         return personService.getPersonById(person_id).getPreferredBeerBrand();
     }
 
-    @Override
-    public List<Tent> getTentsForPersonByPreferredBeerBrand(Long personId) {
-
-        Person person = personService.getPersonById(personId);
-
-        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(personId);
-        boolean personLikesMusic = person.isLikesMusic();
-
-//        if(personLikesMusic) {
-//           tentRepository.findTentByMusicIsTrue(true);
-//        }
-
-       return null;
-    }
+//    @Override
+//    public List<Tent> getTentsForPersonByPreferredBeerBrand(Long personId) {
+//
+//        List<Tent> allTents = getAllTentsForPerson(personId);
+//        Person person = personService.getPersonById(personId);
+//
+//        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(personId);
+//        boolean personLikesMusic = person.isLikesMusic(allTents);
+//
+////        if(personLikesMusic) {
+////           tentRepository.findTentByMusicIsTrue(true);
+////        }
+//
+//       return null;
+//    }
 
     @Override
     public List<Tent> getTentsForPersonByPreferences(Long person_id) {
         //getting person by id
         Person person = personService.getPersonById(person_id);
+        List<Tent> allTents = getAllTentsForPerson(person_id);
         //getting person preferences
         boolean personLikesMusic = person.isLikesMusic();
         List<BeerBrand>  personPreferredBeerBrands = getPersonPreferredBeerBrands(person_id);
 
         if(personLikesMusic) {
-            List<Tent> tentsWithMusic = tentRepository.findTentByMusicIsTrue(tents);
+            List<Tent> tentsWithMusic = tentRepository.findTentByMusicIsTrue(allTents);
         }
 
 
