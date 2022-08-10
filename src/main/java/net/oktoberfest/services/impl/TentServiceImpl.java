@@ -1,5 +1,6 @@
 package net.oktoberfest.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -77,11 +78,7 @@ public class TentServiceImpl implements TentService {
 //        Person person = personService.getPersonById(personId);
 //
 //        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(personId);
-//        boolean personLikesMusic = person.isLikesMusic(allTents);
 //
-////        if(personLikesMusic) {
-////           tentRepository.findTentByMusicIsTrue(true);
-////        }
 //
 //       return null;
 //    }
@@ -90,14 +87,30 @@ public class TentServiceImpl implements TentService {
     public List<Tent> getTentsForPersonByPreferences(Long person_id) {
         //getting person by id
         Person person = personService.getPersonById(person_id);
-        List<Tent> allTents = getAllTentsForPerson(person_id);
-        //getting person preferences
+        //getting person  preferences
         boolean personLikesMusic = person.isLikesMusic();
-        List<BeerBrand>  personPreferredBeerBrands = getPersonPreferredBeerBrands(person_id);
+        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(person_id);
 
-        if(personLikesMusic) {
-            List<Tent> tentsWithMusic = tentRepository.findTentByMusicIsTrue(allTents);
+        List<Tent> tentsWithPersonMusicPreferences =  tentRepository.findAllByMusic(personLikesMusic);
+//        List<String> namesList = personList.stream()
+//                .map(Person::getName)
+//                .collect(Collectors.toList());
+        List<Tent> tentsWithPersonPreferences = new ArrayList<>();
+
+;        for (Tent t: tentsWithPersonMusicPreferences) {
+            for (BeerBrand b: personPreferredBeerBrandsList) {
+                if(b.equals(t.getBeerJug().getBeerBrand()))
+                        tentsWithPersonPreferences.add(t);
+            }
         }
+
+
+//                stream()
+//                .filter(tent -> tent.getBeerJug().getBeerBrand().equals())
+
+
+    //    List<Tent> tentsWithPersonPreferredBeerBrand = getTentsForPersonByPreferredBeerBrand(person_id);
+
 
 
         return null;

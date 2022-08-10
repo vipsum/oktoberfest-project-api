@@ -7,13 +7,13 @@ import org.springframework.stereotype.Repository;
 
 import net.oktoberfest.model.entities.Tent;
 
+
 @Repository
 public interface TentRepository extends JpaRepository<Tent, Long> {
 
     Tent findById(long id);
     List<Tent> findAll();
 
-    List<Tent> findTentByMusicIsTrue(List<Tent> tent);
-    List<Tent> findTentByMusicIsFalse(List<Tent> tent);
-   
+    List<Tent> findAllByMusic(boolean LikesMusic);
+
 }
