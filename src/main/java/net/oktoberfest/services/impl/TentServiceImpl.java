@@ -87,7 +87,15 @@ public class TentServiceImpl implements TentService {
 
     @Override
     public List<Tent> getTentsForPersonByPreferences(Long person_id) {
+        //getting person by id
+        Person person = personService.getPersonById(person_id);
+        //getting person preferences
+        boolean personLikesMusic = person.isLikesMusic();
         List<BeerBrand>  personPreferredBeerBrands = getPersonPreferredBeerBrands(person_id);
+
+        if(personLikesMusic) {
+            List<Tent> tentsWithMusic = tentRepository.findTentByMusicIsTrue(tents);
+        }
 
 
         return null;
