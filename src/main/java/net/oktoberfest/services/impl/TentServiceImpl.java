@@ -2,8 +2,11 @@ package net.oktoberfest.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 import net.oktoberfest.model.entities.BeerBrand;
 import net.oktoberfest.model.entities.BeerJug;
@@ -18,49 +21,73 @@ import net.oktoberfest.services.TentService;
 @Service
 @AllArgsConstructor
 public class TentServiceImpl implements TentService {
-    
+
     private final TentRepository tentRepository;
     private final PersonService personService;
     private final BeerJugService beerJugService;
     private final BeerBrandService beerBrandService;
 
-    public  Tent createTentAndBeerJug(Tent tent, BeerJug beerJug){
+    public Tent createTentAndBeerJug(Tent tent, BeerJug beerJug) {
 
         tent.setBeerJug(beerJug);
+
         return tentRepository.save(tent);
     }
 
-    public Tent getTentByIdForPerson (long id) {
-        
+    public Tent getTentByIdForPerson(long id) {
+
         return tentRepository.findById(id);
-
-    }  
-
-    public List<Tent> getAllTentsForPerson(Long person_id){
-       
-        return tentRepository.findAll();
 
     }
 
-    public Tent addPersonToTent( Long tent_id,Long person_id){
-        
+    public List<Tent> getAllTentsForPerson(Long person_id) {
+
+        return tentRepository.findAll();
+
+    }
+    @Override
+    public boolean checkMatchInTentByPreferences(Long tent_id, Long person_id) {
+
+        Tent tent = getTentByIdForPerson(tent_id);
+        //getting tent attributes
+        boolean tentWithMusic = tent.isMusic();
+        BeerBrand tentBeerBrand = tent.getBeerJug().getBeerBrand();
+        //getting person  preferences
+        boolean personLikesMusic = getPersonMusicPreferences(person_id);
+        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(person_id);
+
+        if (tentWithMusic == personLikesMusic && personPreferredBeerBrandsList.contains(tentBeerBrand))
+            return true;
+        return tentWithMusic;
+    }
+
+    public Tent addPersonToTent(Long tent_id, Long person_id) {
+
         //grabbing person and tent ids
         Person person = personService.getPersonById(person_id);
         Tent tent = getTentByIdForPerson(tent_id);
 
         //getting list of persons in db through personList
         List<Person> personList = tent.getCurrentOccupation();
+        boolean  checkMatchInTentByPreferences = checkMatchInTentByPreferences(tent_id, person_id);
+        if (checkMatchInTentByPreferences) {
+            //adding my new person to the list
+            personList.add(person);
 
-        //adding my new person to the list
-        personList.add(person);
+            //setting the currentOccupation to personList
+            tent.setCurrentOccupation(personList);
+            tent.getBeerJug().setOwner(person);
+            tent.getBoughtBeerJugs().add(tent.getBeerJug());
 
-        //setting the currentOccupation to personList
-        tent.setCurrentOccupation(personList);
-        tent.getBeerJug().setOwner(person);
-        tent.getBoughtBeerJugs().add(tent.getBeerJug());
-
-        //saving the tent 
-        tentRepository.save(tent);
+            //saving the tent
+            tentRepository.save(tent);
+        } else {
+            try {
+                throw new Exception();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
         return tent;
 
     }
@@ -71,59 +98,35 @@ public class TentServiceImpl implements TentService {
         return personService.getPersonById(person_id).getPreferredBeerBrand();
     }
 
-//    @Override
-//    public List<Tent> getTentsForPersonByPreferredBeerBrand(Long personId) {
-//
-//        List<Tent> allTents = getAllTentsForPerson(personId);
-//        Person person = personService.getPersonById(personId);
-//
-//        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(personId);
-//
-//
-//       return null;
-//    }
-
     @Override
-    public List<Tent> getTentsForPersonByPreferences(Long personId) {
-        //getting person by id
-        Person person = personService.getPersonById(personId);
-        //getting person  preferences
-        boolean personLikesMusic = person.isLikesMusic();
-        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(personId);
-
-        List<Tent> tentsWithPersonMusicPreferences =  tentRepository.findAllByMusic(personLikesMusic);
-//        List<String> namesList = personList.stream()
-//                .map(Person::getName)
-//                .collect(Collectors.toList());
-        List<Tent> tentsWithPersonPreferences = new ArrayList<>();
-
-;        for (Tent t: tentsWithPersonMusicPreferences) {
-            for (BeerBrand b: personPreferredBeerBrandsList) {
-                if(b.equals(t.getBeerJug().getBeerBrand()))
-                        tentsWithPersonPreferences.add(t);
-            }
-        }
-
-
-//                stream()
-//                .filter(tent -> tent.getBeerJug().getBeerBrand().equals())
-
-
-    //    List<Tent> tentsWithPersonPreferredBeerBrand = getTentsForPersonByPreferredBeerBrand(person_id);
-
-
-
-        return null;
+    public boolean getPersonMusicPreferences(long person_id) {
+        Person person = personService.getPersonById(person_id);
+        return person.isLikesMusic();
     }
 
+    @Override
+    public List<Tent> getTentsForPersonByPreferences(Long person_id) {
+        //getting person by id
+//        Person person = personService.getPersonById(personId);
 
-    // @Override
-    // public List<Person> getAllPerson(Long tent_id) {
-    //    Optional<Tent> tent = tentRepository.findById(tent_id);
-    //    List<Person> personList = tent.get().getCurrentOccupation();
-    //     return personList;
-    // }
+        //getting person  preferences
+        boolean personLikesMusic = getPersonMusicPreferences(person_id);
+        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(person_id);
+        //finding all tents with person music preferences
+        List<Tent> tentsWithPersonMusicPreferences = tentRepository.findAllByMusic(personLikesMusic);
+        List<Tent> tentsWithPersonPreferences = new ArrayList<>(tentsWithPersonMusicPreferences);
 
+        for (Tent t : tentsWithPersonMusicPreferences) {
+            for (BeerBrand b : personPreferredBeerBrandsList) {
+                if (b.equals(t.getBeerJug().getBeerBrand()))
+                    tentsWithPersonPreferences.add(t);
+            }
+        }
+//                stream()
+//                .filter(tent -> tent.getBeerJug().getBeerBrand().equals())
+        return tentsWithPersonPreferences.stream().distinct().collect(Collectors.toList());
+
+    }
 
 
 

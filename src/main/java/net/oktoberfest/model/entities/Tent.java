@@ -1,11 +1,11 @@
 package net.oktoberfest.model.entities;
 
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.oktoberfest.model.client.request.TentRequest;
 import net.oktoberfest.model.client.response.TentResponse;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +56,7 @@ public class Tent {
     }
 
     public Tent(List<Person> currentOccupation, int maxCapacity, boolean music, BeerJug beerJug,
-            List<Person> reservation,List<BeerJug> boughtBeerJugs) {
+                List<Person> reservation, List<BeerJug> boughtBeerJugs) {
         this.maxCapacity = maxCapacity;
         this.currentOccupation = currentOccupation;
         this.music = music;
@@ -65,8 +65,6 @@ public class Tent {
         this.boughtBeerJugs = boughtBeerJugs;
     }
 
-  
-    
     public TentResponse response() {
         return new TentResponse(this);
     }

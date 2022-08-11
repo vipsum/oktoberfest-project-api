@@ -7,7 +7,7 @@ import net.oktoberfest.model.entities.BeerJug;
 //import net.oktoberfest.model.entities.Person;
 
 public interface BeerJugService {
-    
+
     BeerJug createBeerJug(BeerJugRequest beerJugRequest);
    /*
  public Double calcAlcoholInBlood(Person owner);

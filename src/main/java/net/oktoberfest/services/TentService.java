@@ -15,10 +15,14 @@ public interface TentService {
 
     List<Tent> getAllTentsForPerson(Long person_id);
 
-    Tent addPersonToTent(Long tent_id,Long person_id);
+    Tent addPersonToTent(Long tent_id, Long person_id);
 
     List<BeerBrand> getPersonPreferredBeerBrands(long person_id);
 
-   List<Tent> getTentsForPersonByPreferences(Long personId);
-    
+    boolean getPersonMusicPreferences(long person_id);
+    List<Tent> getTentsForPersonByPreferences(Long person_id);
+
+    boolean checkMatchInTentByPreferences(Long tent_id, Long person_id);
+
+
 }

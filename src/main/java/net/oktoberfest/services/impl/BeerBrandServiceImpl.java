@@ -2,6 +2,7 @@ package net.oktoberfest.services.impl;
 
 import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -27,13 +28,13 @@ public class BeerBrandServiceImpl implements BeerBrandService {
 
     }
 
-    public BeerBrand getBeerBrandByBeerName(String beerName){
+    public BeerBrand getBeerBrandByBeerName(String beerName) {
 
         return beerBrandRepository.findByBeerName(beerName);
     }
 
 
-    public BeerBrand getBeerBrandById(long id){
+    public BeerBrand getBeerBrandById(long id) {
         return beerBrandRepository.findById(id);
     }
 

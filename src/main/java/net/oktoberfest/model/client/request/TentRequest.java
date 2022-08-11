@@ -14,8 +14,8 @@ public class TentRequest {
     //private List<Long> currentOccupation;
     private boolean music;
     private BeerJugRequest beerJug;
-   // private List<Long> reservation;
-    
+    private List<Long> reservation;
+
 
     public Tent construct() {
         return new Tent(this);

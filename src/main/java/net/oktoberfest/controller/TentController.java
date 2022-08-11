@@ -43,16 +43,16 @@ public class TentController {
                 this.tentService.createTentAndBeerJug(tentRequest.construct(), beerJug).response(),
                 HttpStatus.OK);
     }
-    
+
     @GetMapping("/{personId}")
     public ResponseEntity<List<TentResponse>> getAllTentsForPerson(
             @PathVariable Long personId) {
 
         return new ResponseEntity<>(
                 this.tentService.getAllTentsForPerson(personId)
-                .stream()
-                .map(Tent::response)
-                .collect(Collectors.toList())
+                        .stream()
+                        .map(Tent::response)
+                        .collect(Collectors.toList())
                 , HttpStatus.OK);
     }
 
@@ -65,23 +65,18 @@ public class TentController {
                         .stream()
                         .map(Tent::response)
                         .collect(Collectors.toList())
-                        ,HttpStatus.OK);
+                , HttpStatus.OK);
     }
 
-    @PostMapping ("/enter/{tent_id}/person/{person_id}")
+    @PostMapping("/enter/{tent_id}/person/{person_id}")
     public ResponseEntity<TentResponse> getPersonById(
-        @PathVariable Long tent_id, @PathVariable Long person_id){
+            @PathVariable Long tent_id, @PathVariable Long person_id) {
 
-           return new ResponseEntity<>(
-            tentService.addPersonToTent(tent_id,person_id)
-            .response(),
-            HttpStatus.OK);
-        }
-
-    
-
-
-
+        return new ResponseEntity<>(
+                tentService.addPersonToTent(tent_id, person_id)
+                        .response(),
+                HttpStatus.OK);
+    }
 
 
 }
