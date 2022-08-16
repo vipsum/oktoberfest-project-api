@@ -5,6 +5,7 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import net.oktoberfest.repository.BeerBrandRepository;
+import net.oktoberfest.repository.BeerJugRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -28,6 +29,7 @@ public class TentServiceImpl implements TentService {
     private final BeerBrandRepository beerBrandRepository;
     private final PersonService personService;
     private final BeerJugService beerJugService;
+    private final BeerJugRepository beerJugRepository;
     private final BeerBrandService beerBrandService;
 
     public Tent createTentAndBeerJug(Tent tent, BeerJug beerJug) {
@@ -79,11 +81,23 @@ public class TentServiceImpl implements TentService {
         boolean personLikesMusic = person.isLikesMusic();
         List<BeerBrand> personPreferredBeerBrandsList = person.getPreferredBeerBrand();
 
-        boolean matchInPreferences = false;
-        if (tentWithMusic == personLikesMusic && personPreferredBeerBrandsList.contains(tentBeerBrand)) {
-            matchInPreferences = true;
-        }
+        boolean matchInPreferences = tentWithMusic == personLikesMusic && personPreferredBeerBrandsList.contains(tentBeerBrand);
         return matchInPreferences;
+    }
+
+    @Override
+    public boolean checkAlcoholInBlood(Person person) {
+
+        Double alcoholInBlood = 0.0;
+        List<BeerJug> boughtBeerJugs = beerJugRepository.findAllByOwner(person);
+        for (BeerJug b: boughtBeerJugs ) {
+            //getting beerbrand attributes
+            BeerBrand beerBrand = beerBrandRepository.findById(b.getBeerBrand().getId());
+            Double alcoholInBeerJug = b.getBeerJugSize()/100 * beerBrand.getAlcoholPercentage();
+            alcoholInBlood += alcoholInBeerJug;
+        }
+
+        return alcoholInBlood * person.getWeight() <= person.getAlcoholToleranceInBlood();
     }
 
     @Override
@@ -92,10 +106,7 @@ public class TentServiceImpl implements TentService {
         int tentMaxCapacity = tent.getMaxCapacity();
         int tentCurrentOcuppationSize = tent.getCurrentOccupation().size();
 
-        boolean maxCapacity = false;
-        if (tentCurrentOcuppationSize != tentMaxCapacity) {
-            maxCapacity = true;
-        }
+        boolean maxCapacity = tentCurrentOcuppationSize != tentMaxCapacity;
         return maxCapacity;
     }
 
@@ -110,8 +121,9 @@ public class TentServiceImpl implements TentService {
 
         boolean checkMatchInTentByPreferences = checkMatchInTentByPreferences(tent, person);
         boolean checkMaxCapacity = checkMaxCapacity(tent);
+        boolean checkAlcoholInBlood = checkAlcoholInBlood(person);
 
-        if (checkMatchInTentByPreferences  && checkMaxCapacity) {
+        if (checkMatchInTentByPreferences  && checkMaxCapacity && checkAlcoholInBlood) {
             //adding my new person to the list
             personList.add(person);
 

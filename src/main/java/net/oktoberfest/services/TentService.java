@@ -23,6 +23,8 @@ public interface TentService {
 
     boolean checkMatchInTentByPreferences(Tent tent, Person person);
 
+    boolean checkAlcoholInBlood(Person person);
+
     boolean checkMaxCapacity(Tent tent);
 
 }
