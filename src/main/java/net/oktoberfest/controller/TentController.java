@@ -78,5 +78,8 @@ public class TentController {
                 HttpStatus.OK);
     }
 
+//    @PostMapping("/reservations/create/{tent_id}/person/{person_id}")
+//    public ResponseEntity<TentResponse>
+
 
 }

@@ -16,7 +16,6 @@ public interface TentRepository extends JpaRepository<Tent, Long> {
 
     List<Tent> findAll();
 
-   Tent findTentByCurrentOccupationContains(Person person);
 
     List<Tent> findAllByMusic(boolean LikesMusic);
 
