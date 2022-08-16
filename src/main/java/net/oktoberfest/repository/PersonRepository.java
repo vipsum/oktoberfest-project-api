@@ -8,6 +8,7 @@ import net.oktoberfest.model.entities.Person;
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long>{
 
+
    // Person findById(long id);
     
 }

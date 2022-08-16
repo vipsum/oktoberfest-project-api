@@ -6,6 +6,7 @@ import java.util.List;
 // import net.oktoberfest.model.entities.Person;
 import net.oktoberfest.model.entities.BeerBrand;
 import net.oktoberfest.model.entities.BeerJug;
+import net.oktoberfest.model.entities.Person;
 import net.oktoberfest.model.entities.Tent;
 
 public interface TentService {
@@ -17,12 +18,11 @@ public interface TentService {
 
     Tent addPersonToTent(Long tent_id, Long person_id);
 
-    List<BeerBrand> getPersonPreferredBeerBrands(long person_id);
-
-    boolean getPersonMusicPreferences(long person_id);
+//    List<BeerBrand> getPersonPreferredBeerBrands(Person person);
     List<Tent> getTentsForPersonByPreferences(Long person_id);
 
     boolean checkMatchInTentByPreferences(Long tent_id, Long person_id);
 
+    boolean checkMaxCapacity(long tent_id);
 
 }

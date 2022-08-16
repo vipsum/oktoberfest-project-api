@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
+import net.oktoberfest.repository.BeerBrandRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -24,6 +25,7 @@ import net.oktoberfest.services.TentService;
 public class TentServiceImpl implements TentService {
 
     private final TentRepository tentRepository;
+    private final BeerBrandRepository beerBrandRepository;
     private final PersonService personService;
     private final BeerJugService beerJugService;
     private final BeerBrandService beerBrandService;
@@ -45,25 +47,17 @@ public class TentServiceImpl implements TentService {
         return tentRepository.findAll();
     }
 
-    @Override
-    public List<BeerBrand> getPersonPreferredBeerBrands(long person_id) {
-
-        return personService.getPersonById(person_id).getPreferredBeerBrand();
-    }
-
-    @Override
-    public boolean getPersonMusicPreferences(long person_id) {
-
-        Person person = personService.getPersonById(person_id);
-        return person.isLikesMusic();
-    }
 
     @Override
     public List<Tent> getTentsForPersonByPreferences(Long person_id) {
+        Person person = personService.getPersonById(person_id);
 
         //getting person  preferences
-        boolean personLikesMusic = getPersonMusicPreferences(person_id);
-        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(person_id);
+        boolean personLikesMusic = person.isLikesMusic();
+//        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(person);
+        List<BeerBrand> personPreferredBeerBrandsList = person.getPreferredBeerBrand();
+        System.out.println(personPreferredBeerBrandsList);
+
         //finding all tents with person music preferences
         List<Tent> tentsWithPersonMusicPreferences = tentRepository.findAllByMusic(personLikesMusic);
         List<Tent> tentsWithPersonPreferences = new ArrayList<>(tentsWithPersonMusicPreferences);
@@ -79,27 +73,35 @@ public class TentServiceImpl implements TentService {
 
     @Override
     public boolean checkMatchInTentByPreferences(Long tent_id, Long person_id) {
+        Person person = personService.getPersonById(person_id);
 
         Tent tent = getTentByIdForPerson(tent_id);
         //getting tent attributes
         boolean tentWithMusic = tent.isMusic();
         BeerBrand tentBeerBrand = tent.getBeerJug().getBeerBrand();
         //getting person  preferences
-        boolean personLikesMusic = getPersonMusicPreferences(person_id);
-        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(person_id);
+        boolean personLikesMusic = person.isLikesMusic();
+        List<BeerBrand> personPreferredBeerBrandsList = person.getPreferredBeerBrand();
 
-//        for (Tent t : tentsWithPersonMusicPreferences) {
-//            for (BeerBrand b : personPreferredBeerBrandsList) {
-//                if (b.equals(t.getBeerJug().getBeerBrand()))
-//                    tentsWithPersonPreferences.add(t);
-//            }
-//        }
         boolean matchInPreferences = false;
         if (tentWithMusic == personLikesMusic && personPreferredBeerBrandsList.contains(tentBeerBrand)) {
             matchInPreferences = true;
         }
         return matchInPreferences;
+    }
 
+    @Override
+    public boolean checkMaxCapacity(long tent_id) {
+
+        Tent tent = getTentByIdForPerson(tent_id);
+        int tentMaxCapacity = tent.getMaxCapacity();
+        int tentCurrentOcuppationSize = tent.getCurrentOccupation().size();
+
+        boolean maxCapacity = false;
+        if (tentCurrentOcuppationSize != tentMaxCapacity) {
+            maxCapacity = true;
+        }
+        return maxCapacity;
     }
 
     public Tent addPersonToTent(Long tent_id, Long person_id) {
@@ -110,8 +112,11 @@ public class TentServiceImpl implements TentService {
 
         //getting list of persons in db through personList
         List<Person> personList = tent.getCurrentOccupation();
+
         boolean checkMatchInTentByPreferences = checkMatchInTentByPreferences(tent_id, person_id);
-        if (checkMatchInTentByPreferences) {
+        boolean checkMaxCapacity = checkMaxCapacity(tent_id);
+
+        if (checkMatchInTentByPreferences  && checkMaxCapacity) {
             //adding my new person to the list
             personList.add(person);
 
@@ -122,13 +127,7 @@ public class TentServiceImpl implements TentService {
 
             //saving the tent
             tentRepository.save(tent);
-        } else {
-            try {
-                throw new Exception();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
+        } else throw new RuntimeException("something failed here");
         return tent;
 
     }

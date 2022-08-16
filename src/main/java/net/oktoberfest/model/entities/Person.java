@@ -25,7 +25,7 @@ public class Person {
 
     private boolean likesMusic;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
     private List<BeerBrand> preferredBeerBrand;
 

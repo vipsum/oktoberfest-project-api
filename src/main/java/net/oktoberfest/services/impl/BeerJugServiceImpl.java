@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 
 import net.oktoberfest.model.entities.BeerJug;
-//import net.oktoberfest.model.entities.Person;
 import net.oktoberfest.repository.BeerJugRepository;
 
 @Service
