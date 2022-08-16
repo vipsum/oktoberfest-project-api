@@ -63,6 +63,13 @@ public class TentServiceImpl implements TentService {
         return tentRepository.findById(id);
     }
 
+    @Override
+    public List<Person> getAllReservations(long tent_id) {
+
+        Tent tent = getTentByIdForPerson(tent_id);
+        return tent.getReservation();
+    }
+
     public List<Tent> getAllTentsForPerson(Long person_id) {
 
         return tentRepository.findAll();
