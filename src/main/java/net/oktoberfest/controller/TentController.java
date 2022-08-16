@@ -78,6 +78,18 @@ public class TentController {
                 HttpStatus.OK);
     }
 
+    @GetMapping("/show-reservations-by-id/{tent_id}")
+    public ResponseEntity<TentResponse> getAllReservations(
+            @PathVariable Long tent_id) {
+
+        return new ResponseEntity<>(
+                this.tentService.getAllReservations(tent_id)
+                        .stream()
+                        .map(Tent::response)
+                        .collect(Collectors.toList())
+                , HttpStatus.OK);
+    }
+
 //    @PostMapping("/reservations/create/{tent_id}/person/{person_id}")
 //    public ResponseEntity<TentResponse>
 
