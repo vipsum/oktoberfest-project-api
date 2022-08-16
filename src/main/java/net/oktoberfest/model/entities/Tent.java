@@ -71,6 +71,6 @@ public class Tent {
 
     @Override
     public String toString() {
-        return "Register success. Tent Id: " + id;
+        return "Tent Id: " + id;
     }
 }

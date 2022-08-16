@@ -56,11 +56,10 @@ public class TentServiceImpl implements TentService {
         boolean personLikesMusic = person.isLikesMusic();
 //        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(person);
         List<BeerBrand> personPreferredBeerBrandsList = person.getPreferredBeerBrand();
-        System.out.println(personPreferredBeerBrandsList);
 
         //finding all tents with person music preferences
         List<Tent> tentsWithPersonMusicPreferences = tentRepository.findAllByMusic(personLikesMusic);
-        List<Tent> tentsWithPersonPreferences = new ArrayList<>(tentsWithPersonMusicPreferences);
+        List<Tent> tentsWithPersonPreferences = new ArrayList<>();
 
         for (Tent t : tentsWithPersonMusicPreferences) {
             for (BeerBrand b : personPreferredBeerBrandsList) {
