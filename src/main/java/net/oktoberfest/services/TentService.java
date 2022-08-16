@@ -16,6 +16,12 @@ public interface TentService {
 
     List<Tent> getAllTentsForPerson(Long person_id);
 
+    boolean checkAlcoholInBlood(Person person);
+
+    boolean checkMaxCapacity(Tent tent);
+
+    boolean checkIfPersonAlreadyInTent(Person person);
+
     Tent addPersonToTent(Long tent_id, Long person_id);
 
 //    List<BeerBrand> getPersonPreferredBeerBrands(Person person);
@@ -23,8 +29,6 @@ public interface TentService {
 
     boolean checkMatchInTentByPreferences(Tent tent, Person person);
 
-    boolean checkAlcoholInBlood(Person person);
 
-    boolean checkMaxCapacity(Tent tent);
 
 }

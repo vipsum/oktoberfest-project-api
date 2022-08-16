@@ -49,29 +49,6 @@ public class TentServiceImpl implements TentService {
         return tentRepository.findAll();
     }
 
-
-    @Override
-    public List<Tent> getTentsForPersonByPreferences(Long person_id) {
-        Person person = personService.getPersonById(person_id);
-
-        //getting person  preferences
-        boolean personLikesMusic = person.isLikesMusic();
-//        List<BeerBrand> personPreferredBeerBrandsList = getPersonPreferredBeerBrands(person);
-        List<BeerBrand> personPreferredBeerBrandsList = person.getPreferredBeerBrand();
-
-        //finding all tents with person music preferences
-        List<Tent> tentsWithPersonMusicPreferences = tentRepository.findAllByMusic(personLikesMusic);
-        List<Tent> tentsWithPersonPreferences = new ArrayList<>();
-
-        for (Tent t : tentsWithPersonMusicPreferences) {
-            for (BeerBrand b : personPreferredBeerBrandsList) {
-                if (b.equals(t.getBeerJug().getBeerBrand()))
-                    tentsWithPersonPreferences.add(t);
-            }
-        }
-        return tentsWithPersonPreferences.stream().distinct().collect(Collectors.toList());
-    }
-
     @Override
     public boolean checkMatchInTentByPreferences(Tent tent, Person person) {
         //getting tent attributes
@@ -88,7 +65,7 @@ public class TentServiceImpl implements TentService {
     @Override
     public boolean checkAlcoholInBlood(Person person) {
 
-        Double alcoholInBlood = 0.0;
+        double alcoholInBlood = 0.0;
         List<BeerJug> boughtBeerJugs = beerJugRepository.findAllByOwner(person);
         for (BeerJug b: boughtBeerJugs ) {
             //getting beerbrand attributes
@@ -110,6 +87,44 @@ public class TentServiceImpl implements TentService {
         return maxCapacity;
     }
 
+    @Override
+    public boolean checkIfPersonAlreadyInTent(Person person) {
+
+//        List<Person> tentCurrentOccupationn = tent.getCurrentOccupation();
+
+        Tent tentWithPerson = tentRepository.findTentByCurrentOccupationContains(person);
+
+        if (tentWithPerson.getCurrentOccupation().contains(person)) {
+            tentWithPerson.getCurrentOccupation().remove(person);
+            tentRepository.save(tentWithPerson);
+        }
+        return true;
+    }
+
+
+    @Override
+    public List<Tent> getTentsForPersonByPreferences(Long person_id) {
+        Person person = personService.getPersonById(person_id);
+
+        //getting person  preferences
+        boolean personLikesMusic = person.isLikesMusic();
+        List<BeerBrand> personPreferredBeerBrandsList = person.getPreferredBeerBrand();
+
+        //finding all tents with person music preferences
+        List<Tent> tentsWithPersonMusicPreferences = tentRepository.findAllByMusic(personLikesMusic);
+        List<Tent> tentsWithPersonPreferences = new ArrayList<>();
+
+        for (Tent t : tentsWithPersonMusicPreferences) {
+            for (BeerBrand b : personPreferredBeerBrandsList) {
+                if (b.equals(t.getBeerJug().getBeerBrand()))
+                    tentsWithPersonPreferences.add(t);
+            }
+        }
+        return tentsWithPersonPreferences.stream().distinct().collect(Collectors.toList());
+    }
+
+
+
     public Tent addPersonToTent(Long tent_id, Long person_id) {
 
         //grabbing person and tent ids
@@ -122,8 +137,9 @@ public class TentServiceImpl implements TentService {
         boolean checkMatchInTentByPreferences = checkMatchInTentByPreferences(tent, person);
         boolean checkMaxCapacity = checkMaxCapacity(tent);
         boolean checkAlcoholInBlood = checkAlcoholInBlood(person);
+        boolean checkIfPersonAlreadyInTent = checkIfPersonAlreadyInTent(person);
 
-        if (checkMatchInTentByPreferences  && checkMaxCapacity && checkAlcoholInBlood) {
+        if (checkMatchInTentByPreferences  && checkMaxCapacity && checkAlcoholInBlood && checkIfPersonAlreadyInTent) {
             //adding my new person to the list
             personList.add(person);
 

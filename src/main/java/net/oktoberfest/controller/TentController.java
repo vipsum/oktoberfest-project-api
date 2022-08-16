@@ -56,7 +56,7 @@ public class TentController {
                 , HttpStatus.OK);
     }
 
-    @GetMapping("/showTentsById/{personId}")
+    @GetMapping("/show-tents-by-id/{personId}")
     public ResponseEntity<List<TentResponse>> getTentsForPersonByPreferences(
             @PathVariable Long personId) {
 

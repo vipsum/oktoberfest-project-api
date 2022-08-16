@@ -49,7 +49,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Register success. Your ID is: " + id;
+        return "Your person ID is: " + id;
     }
 }
 
