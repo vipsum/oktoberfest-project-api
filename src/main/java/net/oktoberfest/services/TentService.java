@@ -21,8 +21,8 @@ public interface TentService {
 //    List<BeerBrand> getPersonPreferredBeerBrands(Person person);
     List<Tent> getTentsForPersonByPreferences(Long person_id);
 
-    boolean checkMatchInTentByPreferences(Long tent_id, Long person_id);
+    boolean checkMatchInTentByPreferences(Tent tent, Person person);
 
-    boolean checkMaxCapacity(long tent_id);
+    boolean checkMaxCapacity(Tent tent);
 
 }

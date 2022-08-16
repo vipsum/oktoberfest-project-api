@@ -71,10 +71,7 @@ public class TentServiceImpl implements TentService {
     }
 
     @Override
-    public boolean checkMatchInTentByPreferences(Long tent_id, Long person_id) {
-        Person person = personService.getPersonById(person_id);
-
-        Tent tent = getTentByIdForPerson(tent_id);
+    public boolean checkMatchInTentByPreferences(Tent tent, Person person) {
         //getting tent attributes
         boolean tentWithMusic = tent.isMusic();
         BeerBrand tentBeerBrand = tent.getBeerJug().getBeerBrand();
@@ -90,9 +87,8 @@ public class TentServiceImpl implements TentService {
     }
 
     @Override
-    public boolean checkMaxCapacity(long tent_id) {
+    public boolean checkMaxCapacity(Tent tent) {
 
-        Tent tent = getTentByIdForPerson(tent_id);
         int tentMaxCapacity = tent.getMaxCapacity();
         int tentCurrentOcuppationSize = tent.getCurrentOccupation().size();
 
@@ -112,8 +108,8 @@ public class TentServiceImpl implements TentService {
         //getting list of persons in db through personList
         List<Person> personList = tent.getCurrentOccupation();
 
-        boolean checkMatchInTentByPreferences = checkMatchInTentByPreferences(tent_id, person_id);
-        boolean checkMaxCapacity = checkMaxCapacity(tent_id);
+        boolean checkMatchInTentByPreferences = checkMatchInTentByPreferences(tent, person);
+        boolean checkMaxCapacity = checkMaxCapacity(tent);
 
         if (checkMatchInTentByPreferences  && checkMaxCapacity) {
             //adding my new person to the list
