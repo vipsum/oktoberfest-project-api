@@ -143,6 +143,7 @@ public class TentServiceImpl implements TentService {
 
             if (tentReservationsSize > 0) {
                 boolean personInTentReservation = tentReservations.contains(person);
+                return personInTentReservation;
             }
             return true;
     }
