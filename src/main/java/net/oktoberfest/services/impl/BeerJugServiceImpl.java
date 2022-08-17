@@ -31,13 +31,4 @@ public class BeerJugServiceImpl implements BeerJugService {
         return beerJugRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
     }
-
-
-     /*public BeerJug getBeerJugById(long id) {
-        return beerJugRepository.findById(id);
-    }
-   public Double calcAlcohoInBlood(Person owner) {
-        List<BeerJug> jugs = beerJugRepository.findAllByOwner(owner);
-    } /* */
-
 }

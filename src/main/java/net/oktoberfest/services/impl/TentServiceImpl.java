@@ -168,10 +168,19 @@ public class TentServiceImpl implements TentService {
             //adding my new person to the list
             personList.add(person);
 
+            if (tent.getReservation().size() > 0) {
+                BeerJug welcomeBeerJug = new BeerJug(300.0,
+                        tent.getBeerJug().getBeerBrand(),
+                        person);
+                tent.getBoughtBeerJugs().add(welcomeBeerJug);
+            }
+
             //setting the currentOccupation to personList
             tent.setCurrentOccupation(personList);
             tent.getBeerJug().setOwner(person);
+
             tent.getBoughtBeerJugs().add(tent.getBeerJug());
+
 
             //saving the tent
             tentRepository.save(tent);
