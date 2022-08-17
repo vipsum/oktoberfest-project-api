@@ -16,7 +16,7 @@ public interface TentService {
 
     Tent getTentByIdForPerson(long id);
 
-    List<Person> getAllReservations(long tent_id);
+    Tent getAllReservations(long tent_id);
 
     List<Tent> getAllTentsForPerson(Long person_id);
 

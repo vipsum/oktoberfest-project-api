@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import net.oktoberfest.model.entities.BeerJug;
+import net.oktoberfest.model.entities.Person;
 import net.oktoberfest.services.BeerJugService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -83,15 +84,29 @@ public class TentController {
             @PathVariable Long tent_id) {
 
         return new ResponseEntity<>(
-                this.tentService.getAllReservations(tent_id)
-                        .stream()
-                        .map(Tent::response)
-                        .collect(Collectors.toList())
+                tentService.getAllReservations(tent_id).response()
                 , HttpStatus.OK);
     }
 
-//    @PostMapping("/reservations/create/{tent_id}/person/{person_id}")
-//    public ResponseEntity<TentResponse>
+    @PostMapping("/reservations/create/{tent_id}/person/{person_id}")
+    public ResponseEntity<TentResponse> createReservation(
+            @PathVariable Long tent_id, @PathVariable Long person_id) {
+
+//        List<Person> reservationsList = tentService.createReservation(tentRequest.getReservation());
+            return new ResponseEntity<>(
+                    this.tentService.createReservation(tent_id, person_id).response(),
+                    HttpStatus.OK);
+    }
 
 
+//    @PostMapping("/create")
+//    public ResponseEntity<TentResponse> createTentAndBeerJug(
+//            @RequestBody TentRequest tentRequest) {
+//
+//        BeerJug beerJug = beerJugService.createBeerJug(tentRequest.getBeerJug());
+//
+//        return new ResponseEntity<>(
+//                this.tentService.createTentAndBeerJug(tentRequest.construct(), beerJug).response(),
+//                HttpStatus.OK);
+//    }
 }

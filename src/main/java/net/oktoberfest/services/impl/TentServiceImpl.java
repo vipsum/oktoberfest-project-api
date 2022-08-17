@@ -64,10 +64,9 @@ public class TentServiceImpl implements TentService {
     }
 
     @Override
-    public List<Person> getAllReservations(long tent_id) {
+    public Tent getAllReservations(long tent_id) {
 
-        Tent tent = getTentByIdForPerson(tent_id);
-        return tent.getReservation();
+        return getTentByIdForPerson(tent_id);
     }
 
     public List<Tent> getAllTentsForPerson(Long person_id) {
@@ -107,9 +106,9 @@ public class TentServiceImpl implements TentService {
     public boolean checkMaxCapacity(Tent tent) {
 
         int tentMaxCapacity = tent.getMaxCapacity();
-        int tentCurrentOcuppationSize = tent.getCurrentOccupation().size();
+        int tentCurrentOccupationSize = tent.getCurrentOccupation().size();
 
-        boolean maxCapacity = tentCurrentOcuppationSize != tentMaxCapacity;
+        boolean maxCapacity = tentCurrentOccupationSize != tentMaxCapacity;
         return maxCapacity;
     }
 
