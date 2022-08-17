@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import net.oktoberfest.repository.BeerBrandRepository;
 import net.oktoberfest.repository.BeerJugRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import net.oktoberfest.model.entities.BeerBrand;
@@ -62,8 +60,7 @@ public class TentServiceImpl implements TentService {
         int tentMaxCapacity = tent.getMaxCapacity();
         int tentReservations = tent.getReservation().size();
 
-        boolean maxReservations = tentReservations != tentMaxCapacity;
-        return maxReservations;
+        return tentReservations != tentMaxCapacity;
     }
 
     @Override
@@ -75,8 +72,7 @@ public class TentServiceImpl implements TentService {
         boolean personLikesMusic = person.isLikesMusic();
         List<BeerBrand> personPreferredBeerBrandsList = person.getPreferredBeerBrand();
 
-        boolean matchInPreferences = tentWithMusic == personLikesMusic && personPreferredBeerBrandsList.contains(tentBeerBrand);
-        return matchInPreferences;
+        return tentWithMusic == personLikesMusic && personPreferredBeerBrandsList.contains(tentBeerBrand);
     }
 
     @Override
@@ -100,8 +96,7 @@ public class TentServiceImpl implements TentService {
         int tentMaxCapacity = tent.getMaxCapacity();
         int tentCurrentOccupationSize = tent.getCurrentOccupation().size();
 
-        boolean maxCapacity = tentCurrentOccupationSize != tentMaxCapacity;
-        return maxCapacity;
+        return tentCurrentOccupationSize != tentMaxCapacity;
     }
 
     @Override
@@ -140,6 +135,21 @@ public class TentServiceImpl implements TentService {
         return tentsWithPersonPreferences.stream().distinct().collect(Collectors.toList());
     }
 
+    @Override
+    public boolean checkIfTentHasReservation(Tent tent) {
+
+            int tentReservationsSize = tent.getReservation().size();
+            return tentReservationsSize >= 1;
+    }
+
+    @Override
+    public boolean checkIfPersonHasReservation(Tent tent, Person person) {
+
+        List<Person> tentReservations = tent.getReservation();
+
+        return tentReservations.contains(person);
+
+    }
 
 
     public Tent addPersonToTent(Long tent_id, Long person_id) {

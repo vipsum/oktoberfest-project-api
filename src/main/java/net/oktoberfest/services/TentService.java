@@ -27,11 +27,13 @@ public interface TentService {
 
     void checkIfPersonAlreadyInTent(Person person);
 
+
     Tent addPersonToTent(Long tent_id, Long person_id);
 
-//    List<BeerBrand> getPersonPreferredBeerBrands(Person person);
     List<Tent> getTentsForPersonByPreferences(Long person_id);
 
+    boolean checkIfTentHasReservation(Tent tent);
+    boolean checkIfPersonHasReservation(Tent tent, Person person);
 
     boolean checkMatchInTentByPreferences(Tent tent, Person person);
 
