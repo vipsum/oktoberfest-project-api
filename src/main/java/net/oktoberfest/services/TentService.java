@@ -21,7 +21,7 @@ public interface TentService {
     List<Tent> getAllTentsForPerson(Long person_id);
 
     boolean checkMaxReservations(Tent tent);
-    boolean checkAlcoholInBlood(Person person);
+    double checkAlcoholInBlood(Person person);
 
     boolean checkMaxCapacity(Tent tent);
 
@@ -35,6 +35,6 @@ public interface TentService {
     boolean checkIfPersonAndTentHaveReservation(Tent tent, Person person);
     boolean checkMatchInTentByPreferences(Tent tent, Person person);
 
-
+    String enterGame(Long person_id);
 
 }

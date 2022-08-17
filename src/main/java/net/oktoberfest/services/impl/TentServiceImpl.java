@@ -76,7 +76,19 @@ public class TentServiceImpl implements TentService {
     }
 
     @Override
-    public boolean checkAlcoholInBlood(Person person) {
+    public String enterGame(Long person_id) {
+        Person person = personService.getPersonById(person_id);
+        double alcoholInBloodLimit = 3;
+        double alcoholInBlood = checkAlcoholInBlood(person);
+
+        if(alcoholInBlood > 0 && alcoholInBlood < alcoholInBloodLimit) {
+            return "Entraste al juego!";
+        } else return "No cumplis los requsiitos para entrar al juego";
+
+    }
+
+    @Override
+    public double checkAlcoholInBlood(Person person) {
 
         double alcoholInBlood = 0.0;
         List<BeerJug> boughtBeerJugs = beerJugRepository.findAllByOwner(person);
@@ -87,7 +99,7 @@ public class TentServiceImpl implements TentService {
             alcoholInBlood += alcoholInBeerJug;
         }
 
-        return alcoholInBlood / person.getWeight() <= person.getAlcoholToleranceInBlood();
+        return alcoholInBlood / person.getWeight();
     }
 
     @Override
@@ -160,7 +172,7 @@ public class TentServiceImpl implements TentService {
 
         boolean checkMatchInTentByPreferences = checkMatchInTentByPreferences(tent, person);
         boolean checkMaxCapacity = checkMaxCapacity(tent);
-        boolean checkAlcoholInBlood = checkAlcoholInBlood(person);
+        boolean checkAlcoholInBlood = checkAlcoholInBlood(person) <= person.getAlcoholToleranceInBlood();
         boolean checkIfPersonAndTentHaveReservation = checkIfPersonAndTentHaveReservation(tent, person);
 
         checkIfPersonAlreadyInTent(person);

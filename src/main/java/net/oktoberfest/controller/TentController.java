@@ -3,6 +3,7 @@ package net.oktoberfest.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import net.oktoberfest.model.Response;
 import net.oktoberfest.model.entities.BeerJug;
 import net.oktoberfest.model.entities.Person;
 import net.oktoberfest.services.BeerJugService;
@@ -98,7 +99,13 @@ public class TentController {
                     HttpStatus.OK);
     }
 
-
+    @PostMapping("enter-game/{person_id}")
+    public ResponseEntity<String> enterGame (
+            @PathVariable Long person_id) {
+        return new ResponseEntity<>(
+                this.tentService.enterGame(person_id),
+                HttpStatus.OK);
+    }
 //    @PostMapping("/create")
 //    public ResponseEntity<TentResponse> createTentAndBeerJug(
 //            @RequestBody TentRequest tentRequest) {
