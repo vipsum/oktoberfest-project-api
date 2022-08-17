@@ -136,19 +136,15 @@ public class TentServiceImpl implements TentService {
     }
 
     @Override
-    public boolean checkIfTentHasReservation(Tent tent) {
+    public boolean checkIfPersonAndTentHaveReservation(Tent tent, Person person) {
 
             int tentReservationsSize = tent.getReservation().size();
-            return tentReservationsSize >= 1;
-    }
+            List<Person> tentReservations = tent.getReservation();
 
-    @Override
-    public boolean checkIfPersonHasReservation(Tent tent, Person person) {
-
-        List<Person> tentReservations = tent.getReservation();
-
-        return tentReservations.contains(person);
-
+            if (tentReservationsSize > 0) {
+                boolean personInTentReservation = tentReservations.contains(person);
+            }
+            return true;
     }
 
 
@@ -164,9 +160,10 @@ public class TentServiceImpl implements TentService {
         boolean checkMatchInTentByPreferences = checkMatchInTentByPreferences(tent, person);
         boolean checkMaxCapacity = checkMaxCapacity(tent);
         boolean checkAlcoholInBlood = checkAlcoholInBlood(person);
+        boolean checkIfPersonAndTentHaveReservation = checkIfPersonAndTentHaveReservation(tent, person);
 
         checkIfPersonAlreadyInTent(person);
-        if (checkMatchInTentByPreferences  && checkMaxCapacity && checkAlcoholInBlood) {
+        if (checkMatchInTentByPreferences  && checkMaxCapacity && checkAlcoholInBlood && checkIfPersonAndTentHaveReservation) {
             //adding my new person to the list
             personList.add(person);
 

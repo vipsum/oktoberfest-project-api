@@ -32,9 +32,7 @@ public interface TentService {
 
     List<Tent> getTentsForPersonByPreferences(Long person_id);
 
-    boolean checkIfTentHasReservation(Tent tent);
-    boolean checkIfPersonHasReservation(Tent tent, Person person);
-
+    boolean checkIfPersonAndTentHaveReservation(Tent tent, Person person);
     boolean checkMatchInTentByPreferences(Tent tent, Person person);
 
 
