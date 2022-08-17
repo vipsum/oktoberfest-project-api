@@ -17,6 +17,7 @@ public class Games {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "GamesId")
     private List<Person> person;
+
     private int alcoholInBloodLimit;
 
     public Games (){
