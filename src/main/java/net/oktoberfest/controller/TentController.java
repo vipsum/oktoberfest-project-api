@@ -89,12 +89,12 @@ public class TentController {
     }
 
     @PostMapping("/reservations/create/{tent_id}/person/{person_id}")
-    public ResponseEntity<TentResponse> createReservation(
+    public ResponseEntity<TentResponse> addReservation(
             @PathVariable Long tent_id, @PathVariable Long person_id) {
 
 //        List<Person> reservationsList = tentService.createReservation(tentRequest.getReservation());
             return new ResponseEntity<>(
-                    this.tentService.createReservation(tent_id, person_id).response(),
+                    this.tentService.addReservation(tent_id, person_id).response(),
                     HttpStatus.OK);
     }
 

@@ -39,24 +39,7 @@ public class TentServiceImpl implements TentService {
         return tentRepository.save(tent);
     }
 
-    @Override
-    public Tent createReservation(long tent_id, long person_id) {
-        //grabbing person and tent ids
-        Person person = personService.getPersonById(person_id);
-        Tent tent = getTentByIdForPerson(tent_id);
 
-        //getting list of persons in db through personList
-        List<Person> reservationList = tent.getReservation();
-
-        reservationList.add(person);
-
-        //setting the reservations to reservationList
-        tent.setReservation(reservationList);
-        //saving the tent
-        tentRepository.save(tent);
-
-        return tent;
-    }
 
     public Tent getTentByIdForPerson(long id) {
 
@@ -72,6 +55,15 @@ public class TentServiceImpl implements TentService {
     public List<Tent> getAllTentsForPerson(Long person_id) {
 
         return tentRepository.findAll();
+    }
+
+    @Override
+    public boolean checkMaxReservations(Tent tent) {
+        int tentMaxCapacity = tent.getMaxCapacity();
+        int tentReservations = tent.getReservation().size();
+
+        boolean maxReservations = tentReservations != tentMaxCapacity;
+        return maxReservations;
     }
 
     @Override
@@ -178,7 +170,33 @@ public class TentServiceImpl implements TentService {
         } else throw new RuntimeException("something failed here");
         return tent;
 
+
     }
+    @Override
+    public Tent addReservation(long tent_id, long person_id) {
+        //grabbing person and tent ids
+        Person person = personService.getPersonById(person_id);
+        Tent tent = getTentByIdForPerson(tent_id);
+
+        //getting list of persons in db through personList
+        List<Person> reservationList = tent.getReservation();
+
+        boolean checkMatchInTentByPreferences = checkMatchInTentByPreferences(tent, person);
+        boolean checkMaxReservations = checkMaxReservations(tent);
+
+        if (checkMatchInTentByPreferences  && checkMaxReservations) {
+
+            reservationList.add(person);
+            //setting the reservations to reservationList
+            tent.setReservation(reservationList);
+            //saving the tent
+            tentRepository.save(tent);
+
+        } else throw new RuntimeException("something failed here");
+        return tent;
+    }
+
+
 
     /*
  * public class TentServiceImpl implements TentService {

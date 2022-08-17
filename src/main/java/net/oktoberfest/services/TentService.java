@@ -12,7 +12,7 @@ import net.oktoberfest.model.entities.Tent;
 public interface TentService {
     Tent createTentAndBeerJug(Tent tent, BeerJug beerJug);
 
-    Tent createReservation(long tent_id, long person_id);
+    Tent addReservation(long tent_id, long person_id);
 
     Tent getTentByIdForPerson(long id);
 
@@ -20,6 +20,7 @@ public interface TentService {
 
     List<Tent> getAllTentsForPerson(Long person_id);
 
+    boolean checkMaxReservations(Tent tent);
     boolean checkAlcoholInBlood(Person person);
 
     boolean checkMaxCapacity(Tent tent);
