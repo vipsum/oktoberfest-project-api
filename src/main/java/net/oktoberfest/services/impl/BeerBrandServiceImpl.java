@@ -2,9 +2,7 @@ package net.oktoberfest.services.impl;
 
 import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
-
 import java.util.List;
-import java.util.Optional;
 
 import net.oktoberfest.model.entities.BeerBrand;
 import net.oktoberfest.repository.BeerBrandRepository;

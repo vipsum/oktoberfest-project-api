@@ -1,7 +1,5 @@
 package net.oktoberfest.services.impl;
 
-//import java.util.List;
-
 import net.oktoberfest.model.client.request.BeerJugRequest;
 import net.oktoberfest.model.entities.BeerBrand;
 import net.oktoberfest.services.BeerBrandService;
@@ -20,6 +18,7 @@ public class BeerJugServiceImpl implements BeerJugService {
     private BeerBrandService beerBrandService;
 
     public BeerJug createBeerJug(BeerJugRequest beerJugRequest){
+
         BeerJug beerJug = beerJugRequest.construct();
         BeerBrand beerBrand = beerBrandService.getBeerBrandById(beerJugRequest.getBeerBrandId());
         beerJug.setBeerBrand(beerBrand);
@@ -28,6 +27,7 @@ public class BeerJugServiceImpl implements BeerJugService {
 
     @Override
     public BeerJug findById(Long id) {
+        
         return beerJugRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
     }

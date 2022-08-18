@@ -25,7 +25,7 @@ public class GamesServiceImpl implements GamesService {
     @Override
     public String enterGame(Long person_id) {
         Person person = personService.getPersonById(person_id);
-        Games personList =  p
+        Games personList;
         return null;
     }
 

@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/BeerBrand")
+@RequestMapping("/beerbrand")
 @AllArgsConstructor
 
 public class BeerBrandController {
     private final BeerBrandService beerBrandService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<BeerBrandResponse> createBeerBrand(
             @RequestBody BeerBrandRequest beerBrandRequest) {
 
