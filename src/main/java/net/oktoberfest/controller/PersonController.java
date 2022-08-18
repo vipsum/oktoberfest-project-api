@@ -41,7 +41,4 @@ public class PersonController {
                 this.personService.getPersonById(personId).response(),
                 HttpStatus.OK);
     }
-
-
-
 }

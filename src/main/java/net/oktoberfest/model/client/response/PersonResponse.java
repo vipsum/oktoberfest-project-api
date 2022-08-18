@@ -1,10 +1,10 @@
 package net.oktoberfest.model.client.response;
 
+import java.util.List;
+
 import net.oktoberfest.model.Response;
 import net.oktoberfest.model.entities.BeerBrand;
 import net.oktoberfest.model.entities.Person;
-
-import java.util.List;
 
 public class PersonResponse implements Response {
 
@@ -14,12 +14,12 @@ public class PersonResponse implements Response {
     public boolean likesMusic;
     public List<BeerBrand> preferredBeerBrand;
 
-public PersonResponse(Person person) {
+    public PersonResponse(Person person) {
 
-    this.id = person.getId();
-    this.weight = person.getWeight();
-    this.alcoholToleranceInBlood = person.getAlcoholToleranceInBlood();
-    this.likesMusic = person.isLikesMusic();
-    this.preferredBeerBrand = person.getPreferredBeerBrand();
-}
+        this.id = person.getId();
+        this.weight = person.getWeight();
+        this.alcoholToleranceInBlood = person.getAlcoholToleranceInBlood();
+        this.likesMusic = person.isLikesMusic();
+        this.preferredBeerBrand = person.getPreferredBeerBrand();
+    }
 }

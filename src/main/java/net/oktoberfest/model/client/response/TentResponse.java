@@ -26,5 +26,4 @@ public class TentResponse implements Response {
         this.reservation = tent.getReservation();
         this.boughtBeerJugs = tent.getBoughtBeerJugs();
     }
-
 }

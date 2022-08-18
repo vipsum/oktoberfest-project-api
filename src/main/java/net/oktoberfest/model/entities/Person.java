@@ -2,13 +2,11 @@ package net.oktoberfest.model.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.oktoberfest.model.client.request.PersonRequest;
-import net.oktoberfest.model.client.response.PersonResponse;
-
-
 import javax.persistence.*;
 import java.util.List;
 
+import net.oktoberfest.model.client.request.PersonRequest;
+import net.oktoberfest.model.client.response.PersonResponse;
 
 @Data
 @Entity
@@ -20,7 +18,7 @@ public class Person {
     private long id;
 
     private int weight;
-    //aguante
+    // aguante
     private Double alcoholToleranceInBlood;
 
     private boolean likesMusic;
@@ -52,4 +50,3 @@ public class Person {
         return "Your person ID is: " + id;
     }
 }
-

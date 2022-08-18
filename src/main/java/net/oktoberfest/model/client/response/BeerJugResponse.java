@@ -9,13 +9,12 @@ public class BeerJugResponse implements Response {
     public long id;
     public Double beerJugSize;
     public BeerBrand beerBrand;
-    
 
-    public BeerJugResponse(BeerJug beerJug){
+    public BeerJugResponse(BeerJug beerJug) {
 
         this.id = beerJug.getId();
         this.beerJugSize = beerJug.getBeerJugSize();
         this.beerBrand = beerJug.getBeerBrand();
     }
-    
+
 }
